@@ -1,0 +1,83 @@
+---
+api: POST https://api-prod.tartanhq.com/aphrodite/external/v1/create-link/itr
+contentType: application/json
+title : "Create link"
+---
+
+## Request
+
+### Headers
+
+<ParamField header="Authorization" type="string">
+Provide your bearer token in the Authorization header when making requests to protected resources.
+Example:
+Authorization: Bearer XXXXXX-XXXXXX
+</ParamField>
+
+<ParamField header="x-api-key" type="string">
+An API key - your unique key received through your dashboard settings section.
+Example:
+x-api-key: XXXXXX-XXXXXX
+</ParamField>
+
+### Body
+
+<ParamField body="name" type="string" required/>
+
+<ParamField body="applicationId" type="string" required/>
+
+<ParamField body="email" type="string"/>
+
+<ParamField body="mode" type="string"/>
+
+## Responses
+
+
+    ### 200
+    OK
+
+    #### Body
+    <ResponseField name="message" type="string" />
+
+    <ResponseField name="id" type="string" />
+
+    <ResponseField name="link" type="string" />
+
+    ### 400
+    Bad Request
+
+    #### Body
+    <ResponseField name="message" type="string" />
+
+    ### 403
+     Bearer token expired or x-api-key missing in header.
+
+     All credits are exhausted contact [support@tartanhq.com](/docs/api-docs/support@tartanhq.com)
+
+     #### Body
+
+     <ResponseField name="error" type="string" />
+
+    <ResponseField name="message" type="string" />
+
+    <ResponseField name="status" type="integer" />
+
+    <ResponseField name="timestamp" type="integer" />
+
+
+<ResponseExample>
+```json All credits are exhausted
+{
+  "message": "Tartan credit quota exhausted exception"
+}
+```
+
+```json Beared token expired or x-api-key missing in header
+{
+  "error": "Forbidden",
+  "message": "Invalid x-api-key in header or api key does not belong to the user",
+  "status": 403,
+  "timestamp": 1699270746839
+}
+```
+</ResponseExample>

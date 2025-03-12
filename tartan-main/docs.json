@@ -1,0 +1,171 @@
+{
+  "$schema": "https://mintlify.com/docs.json",
+  "theme": "mint",
+  "name": "Tartan",
+  "colors": {
+    "primary": "#193057",
+    "light": "#2f5fec",
+    "dark": "#193057"
+  },
+  "favicon": "/favicon.png",
+  "navigation": {
+    "tabs": [
+      {
+        "tab": "Home",
+        "groups": [
+          {
+            "group": "Home",
+            "pages": [
+              "home"
+            ]
+          }
+        ]
+      },
+      {
+        "tab": "Api Docs",
+        "groups": [
+          {
+            "group": "API",
+            "pages": [
+              "docs/api-docs/welcome",
+              "docs/api-docs/b48da646a3e9e-income-and-employment-verification-journey"
+            ]
+          },
+          {
+            "group": "KYC API",
+            "pages": [
+              {
+                "group": "KYC APIs",
+                "pages": [
+                  {
+                    "group": "Financial and Credit",
+                    "pages": [
+                      {
+                        "group": "ITR Details",
+                        "pages": [
+                          {
+                            "group": "ITR APIs",
+                            "icon": {
+                              "name": "cloud",
+                              "style": "solid"
+                            },
+                            "pages": [
+                              "docs/api-docs/hsgm1e58yvw93-create-link",
+                              "docs/api-docs/qnf7eo0u82x85-json-data-pull"
+                            ]
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "tab": "HRMSSync",
+        "groups": [
+          {
+            "group": "APIs",
+            "pages": [
+              {
+                "group": "HRMSSync",
+                "icon": {
+                  "name": "cloud",
+                  "style": "solid"
+                },
+                "pages": [
+                  "docs/hrmssync/b134f098574e4-hrms-sync",
+                  {
+                    "group": "Onboarding",
+                    "pages": [
+                      "docs/hrmssync/4cdcbeae2e01e-invite-client"
+                    ]
+                  },
+                  {
+                    "group": "HRMS",
+                    "pages": [
+                      "docs/hrmssync/c30fb829a679c-get-list-of-hrms"
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "tab": "Changelog",
+        "groups": [
+          {
+            "group": "Changelog",
+            "pages": [
+              "docs/changelog/changelog"
+            ]
+          }
+        ]
+      },
+      {
+        "tab": "Sync",
+        "pages": [
+          "docs/sync"
+        ]
+      },
+      {
+        "tab": "API Test",
+        "pages": [
+          "api-test"
+        ]
+      }
+    ],
+    "global": {
+      "anchors": [
+        {
+          "anchor": "About Us",
+          "href": "https://www.tartanhq.com/about",
+          "icon": "users"
+        },
+        {
+          "anchor": "Webinar",
+          "href": "https://www.tartanhq.com/webinars-hrms",
+          "icon": "video"
+        }
+      ]
+    }
+  },
+  "styling": {
+    "codeblocks": "dark"
+  },
+  "logo": {
+    "light": "/logo/dark.png",
+    "dark": "/logo/light.png",
+    "href": "https://www.tartanhq.com/"
+  },
+  "appearance": {
+    "default": "light"
+  },
+  "background": {
+    "decoration": "grid"
+  },
+  "navbar": {
+    "links": [
+      {
+        "label": "Blog",
+        "href": "https://www.tartanhq.com/blog"
+      }
+    ],
+    "primary": {
+      "type": "button",
+      "label": "Contact Us",
+      "href": "https://www.tartanhq.com/contact"
+    }
+  },
+  "footer": {
+    "socials": {
+      "linkedin": "https://www.linkedin.com/company/tartanhq/",
+      "x": "https://twitter.com/TartanHQ"
+    }
+  }
+}
