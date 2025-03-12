@@ -1,0 +1,69 @@
+---
+api: POST http://{url}/api/invite_org/
+contentType: application/json
+title : "Invite Client"
+---
+
+| **Body Params** | **Required/Optional** |
+| --- | --- |
+| email | required |
+| fullname | required |
+| org\_name | required |
+| org\_cin | optional |
+| hrms | optional |
+| mobile | optional |
+| website\_url | optional |
+
+## Request
+
+
+### Headers
+
+<ParamField header="Content-Type" type="string">
+Examples: `application/json`
+</ParamField>
+
+### Body
+
+<ParamField body=" " type="string">
+Example:
+```bash
+"{\n    \"email\": \"demo-admin@example.com\",\n    \"org_name\": \"Tartan Test I\",\n    \"fullname\": \"Demo Admin User\",\n    \"org_cin\": \"U72900KA2021FTC0000000\",\n    \"mobile\": \"+91 987-654-3210\",\n    \"website_url\": \"tartanhq.com\"\n}"
+```
+</ParamField>
+
+## Responses
+
+
+    ### 201
+    Created
+
+    #### Headers
+    <ResponseField name="Content-Type" type="string">
+    Examples: `application/json`
+    </ResponseField>
+
+    ### 400
+    Bad Request
+
+    #### Headers
+    <ResponseField name="Content-Type" type="string">
+    Examples: `application/json`
+    </ResponseField>
+
+
+    ### undefined
+    
+    #### Headers
+    <ResponseField name="Content-Type" type="string">
+    Examples: `application/json`
+    </ResponseField>
+
+<ResponseExample>
+```json
+{
+  "message": "User already exists with another Organisation",
+  "data": null
+}
+```
+</ResponseExample>

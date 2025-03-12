@@ -1,0 +1,65 @@
+---
+api: GET https://api-prod.tartanhq.com/aphrodite/api/dashboard/v1/itr/{id}
+contentType: application/json
+title : "JSON Data pull"
+---
+
+## Request
+
+### Path Parameters
+
+<ParamField path="id" type="string" required/>
+
+### Headers
+
+<ParamField header="Authorization" type="string">
+Provide your bearer token in the Authorization header when making requests to protected resources.
+Example:
+Authorization: Bearer XXXXXX-XXXXXX
+</ParamField>
+
+### Body
+
+## Responses
+
+
+    ### 200
+    OK
+
+    #### Body
+    <ResponseField name="id" type="string" />
+
+    <ResponseField name="status" type="string" />
+
+    <ResponseField name="message" type="string" />
+
+    <ResponseField name="itrInfo" type="array[object]" />
+
+    ### 401
+    Bearer token expired or missing in header
+
+    #### Body
+    <ResponseField name="timestamp" type="integer" />
+
+    <ResponseField name="status" type="integer" />
+
+    <ResponseField name="error" type="string" />
+
+    <ResponseField name="message" type="string" />
+
+    <ResponseField name="path" type="string" />
+
+    ### 404
+     Not Found
+
+     #### Body
+
+    <ResponseField name="message" type="string" />
+
+<ResponseExample>
+```json
+{
+  "message": "Item not found"
+}
+```
+</ResponseExample>

@@ -1,0 +1,507 @@
+---
+api: GET http://{url}/api/hrms_list/
+contentType: application/json
+title : "Get List of HRMS"
+description : "This API allows you to retrieve the list of HRMS integrations we offer, along with the necessary parameters for establishing a connection with each specific HRMS."
+---
+
+
+## Responses
+
+
+    ### 200
+    OK
+
+    #### Headers
+
+    <ParamField header="Content-Type" type="string">
+    Example : `application/json`
+    </ParamField>
+
+    #### Body
+
+<ResponseExample>
+```json
+[
+  {
+    "id": 1,
+    "org_name": "GreyTHR",
+    "hrms_code": "greythr",
+    "required_fields": [
+      {
+        "field": "hrms_host",
+        "label": "Host URL",
+        "field_type": "text"
+      },
+      {
+        "field": "username",
+        "label": "Username",
+        "field_type": "text"
+      },
+      {
+        "field": "password",
+        "label": "Password",
+        "field_type": "text"
+      }
+    ],
+    "helping_docs_url": "https://tartan-assets.s3.ap-south-1.amazonaws.com/assets/files/tartan-node/greytHR.pdf",
+    "logo_url": "https://tartan-assets.s3.ap-south-1.amazonaws.com/assets/images/company/HRMSSync/greythr.png",
+    "deposit_switch": true
+  },
+  {
+    "id": 2,
+    "org_name": "Uknowva",
+    "hrms_code": "uknowva",
+    "required_fields": [
+      {
+        "field": "hrms_host",
+        "label": "Host Url",
+        "field_type": "text"
+      },
+      {
+        "field": "token",
+        "label": "Auth Token",
+        "field_type": "text"
+      },
+      {
+        "field": "update_token",
+        "label": "User update token",
+        "field_type": "text"
+      }
+    ],
+    "helping_docs_url": "https://tartan-assets.s3.ap-south-1.amazonaws.com/assets/files/tartan-node/uKnowva.pdf",
+    "logo_url": "https://tartan-assets.s3.ap-south-1.amazonaws.com/assets/images/company/HRMSSync/uknowva.png",
+    "deposit_switch": true
+  },
+  {
+    "id": 3,
+    "org_name": "Keka",
+    "hrms_code": "keka",
+    "required_fields": [
+      {
+        "field": "hrms_host",
+        "label": "Host URL",
+        "field_type": "text"
+      },
+      {
+        "field": "client_id",
+        "label": "Client ID",
+        "field_type": "text"
+      },
+      {
+        "field": "client_secret",
+        "label": "Client Secret",
+        "field_type": "text"
+      },
+      {
+        "field": "api_key",
+        "label": "API Key",
+        "field_type": "text"
+      }
+    ],
+    "helping_docs_url": "https://tartan-assets.s3.ap-south-1.amazonaws.com/assets/files/tartan-node/Keka.pdf",
+    "logo_url": "https://tartan-assets.s3.ap-south-1.amazonaws.com/assets/images/company/HRMSSync/keka.png",
+    "deposit_switch": false
+  },
+  {
+    "id": 4,
+    "org_name": "Successfactors",
+    "hrms_code": "successfactors",
+    "required_fields": [
+      {
+        "field": "hrms_host",
+        "label": "Host URL",
+        "field_type": "text"
+      },
+      {
+        "field": "company_id",
+        "label": "Company ID",
+        "field_type": "text"
+      },
+      {
+        "field": "client_id",
+        "label": "Client ID",
+        "field_type": "text"
+      },
+      {
+        "field": "api_user",
+        "label": "API User",
+        "field_type": "text"
+      }
+    ],
+    "helping_docs_url": null,
+    "logo_url": "https://tartan-assets.s3.ap-south-1.amazonaws.com/assets/images/company/HRMSSync/successfactors.png",
+    "deposit_switch": false
+  },
+  {
+    "id": 5,
+    "org_name": "Zoho",
+    "hrms_code": "zoho",
+    "required_fields": [
+      {
+        "field": "data_center",
+        "label": "Data Center",
+        "options": [
+          "in",
+          "com"
+        ],
+        "field_type": "select"
+      },
+      {
+        "field": "client_id",
+        "label": "Client ID",
+        "field_type": "text"
+      },
+      {
+        "field": "client_secret",
+        "label": "Client Secret",
+        "field_type": "text"
+      },
+      {
+        "field": "code",
+        "label": "Code",
+        "field_type": "text"
+      }
+    ],
+    "helping_docs_url": "https://tartan-assets.s3.ap-south-1.amazonaws.com/assets/files/tartan-node/ZOHO+People.pdf",
+    "logo_url": "https://tartan-assets.s3.ap-south-1.amazonaws.com/assets/images/company/HRMSSync/zoho.png",
+    "deposit_switch": false
+  },
+  {
+    "id": 6,
+    "org_name": "Beehive",
+    "hrms_code": "beehive",
+    "required_fields": [
+      {
+        "field": "username",
+        "label": "Username",
+        "field_type": "text"
+      },
+      {
+        "field": "password",
+        "label": "Password",
+        "field_type": "text"
+      }
+    ],
+    "helping_docs_url": "https://tartan-assets.s3.ap-south-1.amazonaws.com/assets/files/tartan-node/Beehive.pdf",
+    "logo_url": "https://tartan-assets.s3.ap-south-1.amazonaws.com/assets/images/company/HRMSSync/beehive.png",
+    "deposit_switch": false
+  },
+  {
+    "id": 7,
+    "org_name": "DarwinBox",
+    "hrms_code": "darwinbox",
+    "required_fields": [
+      {
+        "field": "username",
+        "label": "Username",
+        "field_type": "text"
+      },
+      {
+        "field": "password",
+        "label": "Password",
+        "field_type": "text"
+      },
+      {
+        "field": "api_key",
+        "label": "API Key",
+        "field_type": "text"
+      },
+      {
+        "field": "hrms_host",
+        "label": "Host URL",
+        "field_type": "text"
+      },
+      {
+        "field": "dataset_key",
+        "label": "DataSet Key",
+        "field_type": "text"
+      }
+    ],
+    "helping_docs_url": "https://tartan-assets.s3.ap-south-1.amazonaws.com/assets/files/tartan-node/darwinbox.pdf",
+    "logo_url": "https://tartan-assets.s3.ap-south-1.amazonaws.com/assets/images/company/HRMSSync/darwinbox.png",
+    "deposit_switch": true
+  },
+  {
+    "id": 8,
+    "org_name": "ZingHR",
+    "hrms_code": "zinghr",
+    "required_fields": [
+      {
+        "field": "hrms_host",
+        "label": "Host URL",
+        "field_type": "text"
+      },
+      {
+        "field": "subscription_name",
+        "label": "Subscription Name",
+        "field_type": "text"
+      },
+      {
+        "Token": "text",
+        "field": "token",
+        "label": "Password"
+      }
+    ],
+    "helping_docs_url": "https://tartan-assets.s3.ap-south-1.amazonaws.com/assets/files/tartan-node/Zinghr.pdf",
+    "logo_url": "https://tartan-assets.s3.ap-south-1.amazonaws.com/assets/images/company/HRMSSync/zinghr.png",
+    "deposit_switch": true
+  },
+  {
+    "id": 9,
+    "org_name": "FreshTeam",
+    "hrms_code": "freshteam",
+    "required_fields": [
+      {
+        "field": "hrms_host",
+        "label": "Host Url",
+        "field_type": "text"
+      },
+      {
+        "field": "token",
+        "label": "Access Token",
+        "field_type": "text"
+      }
+    ],
+    "helping_docs_url": "https://tartan-assets.s3.ap-south-1.amazonaws.com/assets/files/tartan-node/Freshteam.pdf",
+    "logo_url": "https://tartan-assets.s3.ap-south-1.amazonaws.com/assets/images/company/HRMSSync/freshteam.png",
+    "deposit_switch": false
+  },
+  {
+    "id": 10,
+    "org_name": "BambooHR",
+    "hrms_code": "bamboohr",
+    "required_fields": [
+      {
+        "field": "company_domain",
+        "label": "Company Domain",
+        "field_type": "text"
+      },
+      {
+        "field": "api_secret_key",
+        "label": "API Secret Key",
+        "field_type": "text"
+      }
+    ],
+    "helping_docs_url": "https://tartan-assets.s3.ap-south-1.amazonaws.com/assets/files/tartan-node/BambooHR.pdf",
+    "logo_url": "https://tartan-assets.s3.ap-south-1.amazonaws.com/assets/images/company/HRMSSync/bamboohr.png",
+    "deposit_switch": false
+  },
+  {
+    "id": 11,
+    "org_name": "Paycor",
+    "hrms_code": "paycor",
+    "required_fields": [
+      {
+        "field": "hrms_host",
+        "label": "Host Url",
+        "field_type": "text"
+      },
+      {
+        "field": "legal_entity_id",
+        "label": "legalEntityId",
+        "field_type": "text"
+      },
+      {
+        "field": "token",
+        "label": "Authorization",
+        "field_type": "text"
+      },
+      {
+        "field": "subscription_key",
+        "label": "Ocp-Apim-Subscription-Key",
+        "field_type": "text"
+      }
+    ],
+    "helping_docs_url": "https://tartan-assets.s3.ap-south-1.amazonaws.com/assets/files/tartan-node/Paycor.pdf",
+    "logo_url": "https://tartan-assets.s3.ap-south-1.amazonaws.com/assets/images/company/HRMSSync/paycor.png",
+    "deposit_switch": false
+  },
+  {
+    "id": 12,
+    "org_name": "Workline",
+    "hrms_code": "workline",
+    "required_fields": [
+      {
+        "field": "hrms_host",
+        "label": "Host Url",
+        "field_type": "text"
+      },
+      {
+        "field": "app_id",
+        "label": "AppId",
+        "field_type": "text"
+      },
+      {
+        "field": "username",
+        "label": "username",
+        "field_type": "text"
+      },
+      {
+        "field": "password",
+        "label": "password",
+        "field_type": "text"
+      }
+    ],
+    "helping_docs_url": "https://tartan-assets.s3.ap-south-1.amazonaws.com/assets/files/tartan-node/Workline.pdf",
+    "logo_url": "https://tartan-assets.s3.ap-south-1.amazonaws.com/assets/images/company/HRMSSync/workline.png",
+    "deposit_switch": false
+  },
+  {
+    "id": 13,
+    "org_name": "Paychex",
+    "hrms_code": "paychex",
+    "required_fields": [
+      {
+        "field": "hrms_host",
+        "label": "Host Url",
+        "field_type": "text"
+      },
+      {
+        "field": "client_id",
+        "label": "client_id",
+        "field_type": "text"
+      },
+      {
+        "field": "client_secret",
+        "label": "client_secret",
+        "field_type": "text"
+      },
+      {
+        "field": "company_id",
+        "label": "comapnyId",
+        "field_type": "text"
+      }
+    ],
+    "helping_docs_url": "https://tartan-assets.s3.ap-south-1.amazonaws.com/assets/files/tartan-node/Paychex.pdf",
+    "logo_url": "https://tartan-assets.s3.ap-south-1.amazonaws.com/assets/images/company/HRMSSync/paychex.png",
+    "deposit_switch": false
+  },
+  {
+    "id": 14,
+    "org_name": "PeopleStrong",
+    "hrms_code": "peoplestrong",
+    "required_fields": [
+      {
+        "field": "hrms_host",
+        "label": "Host URL",
+        "field_type": "text"
+      },
+      {
+        "field": "client_secret",
+        "label": "Client Secret",
+        "field_type": "text"
+      },
+      {
+        "field": "client_id",
+        "label": "Client ID",
+        "field_type": "text"
+      },
+      {
+        "field": "realm_id",
+        "label": "realmId",
+        "field_type": "text"
+      },
+      {
+        "field": "secret_key",
+        "label": "Secret Key",
+        "field_type": "text"
+      },
+      {
+        "field": "api_key",
+        "label": "Api Key",
+        "field_type": "text"
+      }
+    ],
+    "helping_docs_url": "https://tartan-assets.s3.ap-south-1.amazonaws.com/assets/files/tartan-node/Peoplestrong.pdf",
+    "logo_url": "https://tartan-assets.s3.ap-south-1.amazonaws.com/assets/images/company/HRMSSync/peoplestrong.png",
+    "deposit_switch": true
+  },
+  {
+    "id": 15,
+    "org_name": "PeopleHR",
+    "hrms_code": "peoplehr",
+    "required_fields": [
+      {
+        "field": "hrms_host",
+        "label": "Host Url",
+        "field_type": "text"
+      },
+      {
+        "field": "api_key",
+        "label": "Api Key",
+        "field_type": "text"
+      }
+    ],
+    "helping_docs_url": "https://tartan-assets.s3.ap-south-1.amazonaws.com/assets/files/tartan-node/PeopleHR.pdf",
+    "logo_url": "https://tartan-assets.s3.ap-south-1.amazonaws.com/assets/images/company/HRMSSync/PeopleHR+Verification.png",
+    "deposit_switch": false
+  },
+  {
+    "id": 16,
+    "org_name": "CSVUpload",
+    "hrms_code": "csvupload",
+    "required_fields": null,
+    "helping_docs_url": null,
+    "logo_url": null,
+    "deposit_switch": false
+  },
+  {
+    "id": 17,
+    "org_name": "Pocket",
+    "hrms_code": "pocket",
+    "required_fields": [
+      {
+        "field": "token",
+        "label": "Token",
+        "field_type": "text"
+      }
+    ],
+    "helping_docs_url": null,
+    "logo_url": "https://tartan-assets.s3.ap-south-1.amazonaws.com/assets/images/company/HRMSSync/PocketHRMS.png",
+    "deposit_switch": false
+  },
+  {
+    "id": 18,
+    "org_name": "SumHR",
+    "hrms_code": "sumhr",
+    "required_fields": [
+      {
+        "field": "username",
+        "label": "Username",
+        "field_type": "text"
+      },
+      {
+        "field": "password",
+        "label": "Password",
+        "field_type": "text"
+      },
+      {
+        "field": "company_domain",
+        "label": "Company Domain",
+        "field_type": "text"
+      }
+    ],
+    "helping_docs_url": null,
+    "logo_url": "https://tartan-assets.s3.ap-south-1.amazonaws.com/assets/images/company/HRMSSync/SumHRMS.png",
+    "deposit_switch": false
+  },
+  {
+    "id": 19,
+    "org_name": "Peopleworks",
+    "hrms_code": "peopleworks",
+    "required_fields": [
+      {
+        "field": "api_key",
+        "label": "Api Key",
+        "field_type": "text"
+      }
+    ],
+    "helping_docs_url": null,
+    "logo_url": "https://tartan-assets.s3.ap-south-1.amazonaws.com/assets/images/company/HRMSSync/Peopleworks.png",
+    "deposit_switch": false
+  }
+]
+```
+</ResponseExample>
+

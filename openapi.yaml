@@ -1,0 +1,60 @@
+openapi: 3.0.0
+info:
+  title: SDK Token API
+  description: API to generate a token for the SDK by providing user and organization details.
+  version: 1.0.0
+servers:
+  - url: 'https://node.tartanhq.com'
+
+paths:
+  /api/sdk/token/:
+    post:
+      summary: Generate SDK Token
+      description: Generate an authentication token for the SDK using user and organization details.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                  format: email
+                  description: The email address of the user.
+                org_name:
+                  type: string
+                  description: The name of the organization.
+                fullname:
+                  type: string
+                  description: The full name of the user.
+                remote_org_id:
+                  type: string
+                  description: A unique identifier for the remote organization.
+      responses:
+        '200':
+          description: Token generated successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  token:
+                    type: string
+                    description: The generated token for SDK authentication.
+        '400':
+          description: Bad request - Missing or invalid parameters
+        '401':
+          description: Unauthorized - Invalid API token
+        '500':
+          description: Internal Server Error
+
+      security:
+        - ApiKeyAuth: []  # This API requires an API token for authorization
+
+components:
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: Authorization

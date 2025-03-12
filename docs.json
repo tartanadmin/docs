@@ -1,101 +1,171 @@
 {
   "$schema": "https://mintlify.com/docs.json",
   "theme": "mint",
-  "name": "Mint Starter Kit",
+  "name": "Tartan",
   "colors": {
-    "primary": "#16A34A",
-    "light": "#07C983",
-    "dark": "#15803D"
+    "primary": "#193057",
+    "light": "#2f5fec",
+    "dark": "#193057"
   },
-  "favicon": "/favicon.svg",
+  "favicon": "/favicon.png",
   "navigation": {
     "tabs": [
       {
-        "tab": "Guides",
+        "tab": "Home",
         "groups": [
           {
-            "group": "Get Started",
+            "group": "Home",
             "pages": [
-              "introduction",
-              "quickstart",
-              "development"
-            ]
-          },
-          {
-            "group": "Essentials",
-            "pages": [
-              "essentials/markdown",
-              "essentials/code",
-              "essentials/images",
-              "essentials/settings",
-              "essentials/navigation",
-              "essentials/reusable-snippets"
+              "home"
             ]
           }
         ]
       },
       {
-        "tab": "API Reference",
+        "tab": "Api Docs",
         "groups": [
           {
-            "group": "API Documentation",
+            "group": "API",
             "pages": [
-              "api-reference/introduction"
+              "docs/api-docs/welcome",
+              "docs/api-docs/b48da646a3e9e-income-and-employment-verification-journey"
             ]
           },
           {
-            "group": "Endpoint Examples",
+            "group": "KYC API",
             "pages": [
-              "api-reference/endpoint/get",
-              "api-reference/endpoint/create",
-              "api-reference/endpoint/delete"
+              {
+                "group": "KYC APIs",
+                "pages": [
+                  {
+                    "group": "Financial and Credit",
+                    "pages": [
+                      {
+                        "group": "ITR Details",
+                        "pages": [
+                          {
+                            "group": "ITR APIs",
+                            "icon": {
+                              "name": "cloud",
+                              "style": "solid"
+                            },
+                            "pages": [
+                              "docs/api-docs/hsgm1e58yvw93-create-link",
+                              "docs/api-docs/qnf7eo0u82x85-json-data-pull"
+                            ]
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                ]
+              }
             ]
           }
+        ]
+      },
+      {
+        "tab": "HRMSSync",
+        "groups": [
+          {
+            "group": "APIs",
+            "pages": [
+              {
+                "group": "HRMSSync",
+                "icon": {
+                  "name": "cloud",
+                  "style": "solid"
+                },
+                "pages": [
+                  "docs/hrmssync/b134f098574e4-hrms-sync",
+                  {
+                    "group": "Onboarding",
+                    "pages": [
+                      "docs/hrmssync/4cdcbeae2e01e-invite-client"
+                    ]
+                  },
+                  {
+                    "group": "HRMS",
+                    "pages": [
+                      "docs/hrmssync/c30fb829a679c-get-list-of-hrms"
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "tab": "Changelog",
+        "groups": [
+          {
+            "group": "Changelog",
+            "pages": [
+              "docs/changelog/changelog"
+            ]
+          }
+        ]
+      },
+      {
+        "tab": "Sync",
+        "pages": [
+          "docs/sync"
+        ]
+      },
+      {
+        "tab": "API Test",
+        "pages": [
+          "api-test"
         ]
       }
     ],
     "global": {
       "anchors": [
         {
-          "anchor": "Documentation",
-          "href": "https://mintlify.com/docs",
-          "icon": "book-open-cover"
+          "anchor": "About Us",
+          "href": "https://www.tartanhq.com/about",
+          "icon": "users"
         },
         {
-          "anchor": "Community",
-          "href": "https://mintlify.com/community",
-          "icon": "slack"
-        },
-        {
-          "anchor": "Blog",
-          "href": "https://mintlify.com/blog",
-          "icon": "newspaper"
+          "anchor": "Webinar",
+          "href": "https://www.tartanhq.com/webinars-hrms",
+          "icon": "video"
         }
       ]
     }
   },
+  "styling": {
+    "codeblocks": "dark"
+  },
   "logo": {
-    "light": "/logo/light.svg",
-    "dark": "/logo/dark.svg"
+    "light": "/logo/dark.png",
+    "dark": "/logo/light.png",
+    "href": "https://www.tartanhq.com/"
+  },
+  "appearance": {
+    "default": "light"
+  },
+  "background": {
+    "decoration": "grid"
   },
   "navbar": {
     "links": [
       {
-        "label": "Support",
-        "href": "mailto:hi@mintlify.com"
+        "label": "Blog",
+        "href": "https://www.tartanhq.com/blog"
       }
     ],
     "primary": {
       "type": "button",
-      "label": "Dashboard",
-      "href": "https://dashboard.mintlify.com"
+      "label": "Contact Us",
+      "href": "https://www.tartanhq.com/contact"
     }
   },
   "footer": {
     "socials": {
-      "x": "https://x.com/mintlify",
-      "github": "https://github.com/mintlify",
-      "linkedin": "https://linkedin.com/company/mintlify"
+      "linkedin": "https://www.linkedin.com/company/tartanhq/",
+      "x": "https://twitter.com/TartanHQ"
     }
   }
 }
