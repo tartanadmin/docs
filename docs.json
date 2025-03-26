@@ -11,112 +11,79 @@
   "navigation": {
     "tabs": [
       {
-        "tab": "Home",
+        "tab": "Documentation",
         "groups": [
           {
-            "group": "Home",
+            "group": "Tartan Sync",
             "pages": [
-              "home"
-            ]
-          }
-        ]
-      },
-      {
-        "tab": "Api Docs",
-        "groups": [
-          {
-            "group": "API",
-            "pages": [
-              "docs/api-docs/welcome",
-              "docs/api-docs/b48da646a3e9e-income-and-employment-verification-journey"
+              "docs/hrmssync/What-is-sync",
+              "docs/hrmssync/glossary"
             ]
           },
           {
-            "group": "KYC API",
+            "group": "Developer Tools",
             "pages": [
-              {
-                "group": "KYC APIs",
-                "pages": [
-                  {
-                    "group": "Financial and Credit",
-                    "pages": [
-                      {
-                        "group": "ITR Details",
-                        "pages": [
-                          {
-                            "group": "ITR APIs",
-                            "icon": {
-                              "name": "cloud",
-                              "style": "solid"
-                            },
-                            "pages": [
-                              "docs/api-docs/hsgm1e58yvw93-create-link",
-                              "docs/api-docs/qnf7eo0u82x85-json-data-pull"
-                            ]
-                          }
-                        ]
-                      }
-                    ]
-                  }
-                ]
-              }
+              "docs/hrmssync/errors",
+              "docs/hrmssync/logs"
+            ]
+          },
+          {
+            "group": "Resources",
+            "pages": [
+              "docs/hrmssync/unified-apis",
+              "docs/hrmssync/terms-and-conditions",
+              "docs/hrmssync/privacy-policy"
             ]
           }
         ]
       },
       {
-        "tab": "HRMSSync",
+        "tab": "Unified APIs",
         "groups": [
           {
-            "group": "APIs",
+            "group": "HRMS",
             "pages": [
+              "docs/api-docs/introduction",
+              "docs/api-docs/integration-types",
               {
-                "group": "HRMSSync",
-                "icon": {
-                  "name": "cloud",
-                  "style": "solid"
-                },
+                "group": "Reference",
                 "pages": [
-                  "docs/hrmssync/b134f098574e4-hrms-sync",
                   {
-                    "group": "Onboarding",
+                    "group": "Introduction",
                     "pages": [
-                      "docs/hrmssync/4cdcbeae2e01e-invite-client"
+                      "docs/api-docs/reference/base-url",
+                      "docs/api-docs/reference/pagination",
+                      "docs/api-docs/reference/auth",
+                      "docs/api-docs/reference/headers",
+                      "docs/api-docs/reference/errors"
                     ]
                   },
                   {
-                    "group": "HRMS",
+                    "group": "Employees",
                     "pages": [
-                      "docs/hrmssync/c30fb829a679c-get-list-of-hrms"
+                      "docs/api-docs/reference/employees/employee-directory",
+                      "docs/api-docs/reference/employees/get-employee",
+                      "docs/api-docs/reference/employees/update-employee"
+                    ]
+                  },
+                  {
+                    "group": "SDK",
+                    "pages": [
+                      "docs/api-docs/sdk"
                     ]
                   }
                 ]
               }
             ]
-          }
-        ]
-      },
-      {
-        "tab": "Changelog",
-        "groups": [
+          },
           {
-            "group": "Changelog",
-            "pages": [
-              "docs/changelog/changelog"
-            ]
+            "group": "CRM",
+            "pages": []
+          },
+          {
+            "group": "Expense",
+            "pages": []
           }
-        ]
-      },
-      {
-        "tab": "Sync",
-        "pages": [
-          "docs/sync"
-        ]
-      },
-      {
-        "tab": "API Test",
-        "pages": [
-          "api-test"
         ]
       }
     ],
