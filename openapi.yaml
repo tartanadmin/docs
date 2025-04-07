@@ -247,6 +247,83 @@ paths:
       security:
         - TokenAuth: []
 
+  /api/sdk/token/:
+    post:
+      summary: Generate SDK Token
+      description: Issues an SDK authentication token using email, organization name, full name, and remote organization ID.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - email
+                - org_name
+                - fullname
+                - remote_org_id
+              properties:
+                email:
+                  type: string
+                  format: email
+                  description: The user's email address.
+                org_name:
+                  type: string
+                  description: The name of the organization.
+                fullname:
+                  type: string
+                  description: The user's full name.
+                remote_org_id:
+                  type: string
+                  description: A unique identifier for the remote organization.
+      responses:
+        '200':
+          description: Token generated successfully.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  token:
+                    type: string
+                    description: The generated SDK token.
+        '400':
+          description: Bad request - missing or invalid parameters.
+        '401':
+          description: Unauthorized - invalid token.
+        '500':
+          description: Internal server error.
+      security:
+        - TokenAuth: []
+
+  /api/terminate_connection:
+    post:
+      summary: Terminate Connection
+      description: Terminates an existing vendor-client connection.
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              required:
+                - client_org
+              properties:
+                client_org:
+                  type: string
+                  description: The client organization's identifier to disconnect.
+      responses:
+        '200':
+          description: Connection terminated successfully.
+        '400':
+          description: Bad request - missing or invalid client_org.
+        '401':
+          description: Unauthorized - Invalid token.
+        '500':
+          description: Internal server error.
+      security:
+        - TokenAuth: []
+
 components:
   securitySchemes:
     TokenAuth:
