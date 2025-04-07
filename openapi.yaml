@@ -1,59 +1,258 @@
 openapi: 3.0.0
 info:
-  title: SDK Token API
-  description: API to generate a token for the SDK by providing user and organization details.
+  title: Employee List API
+  description: Retrieve a paginated list of employees from the organization.
   version: 1.0.0
 servers:
-  - url: 'https://node.tartanhq.com'
-
+  - url: "{{url}}"
 paths:
-  /api/sdk/token/:
+  /api/employee_list:
+    get:
+      summary: Get Employee List
+      description: Returns a list of employees for the given organization.
+      parameters:
+        - in: query
+          name: org
+          required: true
+          schema:
+            type: string
+          description: The organization identifier.
+        - in: query
+          name: page
+          required: false
+          schema:
+            type: integer
+          description: The page number to fetch.
+        - in: query
+          name: size
+          required: false
+          schema:
+            type: integer
+          description: Number of employees to return per page.
+      responses:
+        '200':
+          description: A list of employees
+        '401':
+          description: Unauthorized - Invalid or missing token
+        '500':
+          description: Server error
+      security:
+        - TokenAuth: []
+  /api/v2/employee_list:
+    get:
+      summary: Get Employee List (v2)
+      description: Returns a list of employees for the given organization, with support for pagination, filtering, and update tracking.
+      parameters:
+        - in: query
+          name: org
+          required: true
+          schema:
+            type: string
+          description: The organization identifier.
+        - in: query
+          name: page
+          required: false
+          schema:
+            type: integer
+          description: The page number to fetch.
+        - in: query
+          name: size
+          required: false
+          schema:
+            type: integer
+          description: Number of employees to return per page.
+        - in: query
+          name: from_date
+          required: false
+          schema:
+            type: string
+            format: date-time
+          description: Return employees updated after this date.
+        - in: query
+          name: source
+          required: false
+          schema:
+            type: string
+          description: Data source (e.g., db, api).
+        - in: query
+          name: filter
+          required: false
+          schema:
+            type: string
+          description: Filter in the format `field:value`, e.g., `status:active`.
+      responses:
+        '200':
+          description: A filtered and paginated list of employees.
+        '401':
+          description: Unauthorized - Invalid or missing token.
+        '500':
+          description: Server error.
+      security:
+        - TokenAuth: []
+
+  /api/employee_details/{id}:
+    get:
+      summary: Get Employee Details
+      description: Returns detailed information for a specific employee.
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+          description: Unique identifier of the employee.
+        - in: query
+          name: org
+          required: true
+          schema:
+            type: string
+          description: The organization identifier.
+      responses:
+        '200':
+          description: Employee details retrieved successfully.
+        '401':
+          description: Unauthorized - Invalid or missing token.
+        '404':
+          description: Employee not found.
+        '500':
+          description: Server error.
+      security:
+        - TokenAuth: []
+
+  /api/salary_details/{id}:
+    get:
+      summary: Get Salary Details
+      description: Returns salary details for an employee, optionally filtered by a starting date.
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+          description: Unique identifier of the employee.
+        - in: query
+          name: from_date
+          required: false
+          schema:
+            type: string
+            format: date
+          description: Filter to return salary data from this date.
+        - in: query
+          name: org
+          required: true
+          schema:
+            type: string
+          description: The organization identifier.
+      responses:
+        '200':
+          description: Salary details retrieved successfully.
+        '401':
+          description: Unauthorized - Invalid or missing API key.
+        '404':
+          description: Employee not found.
+        '500':
+          description: Server error.
+      security:
+        - ApiKeyAuth: []
+
+  /api/update_bank/:
     post:
-      summary: Generate SDK Token
-      description: Generate an authentication token for the SDK using user and organization details.
+      summary: Update Bank Details
+      description: Updates the bank details for a specific employee.
       requestBody:
         required: true
         content:
           application/json:
             schema:
               type: object
+              required:
+                - id
+                - org_id
+                - bank_details
               properties:
-                email:
+                id:
                   type: string
-                  format: email
-                  description: The email address of the user.
-                org_name:
+                  description: Unique identifier of the employee.
+                org_id:
                   type: string
-                  description: The name of the organization.
-                fullname:
-                  type: string
-                  description: The full name of the user.
-                remote_org_id:
-                  type: string
-                  description: A unique identifier for the remote organization.
+                  description: Organization identifier.
+                bank_details:
+                  type: object
+                  required:
+                    - account_number
+                    - ifsc_code
+                    - bank_name
+                  properties:
+                    account_number:
+                      type: string
+                      description: The employee's bank account number.
+                    ifsc_code:
+                      type: string
+                      description: The IFSC code of the bank branch.
+                    bank_name:
+                      type: string
+                      description: Name of the bank.
       responses:
         '200':
-          description: Token generated successfully
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  token:
-                    type: string
-                    description: The generated token for SDK authentication.
+          description: Bank details updated successfully.
         '400':
-          description: Bad request - Missing or invalid parameters
+          description: Bad request - invalid or missing parameters.
         '401':
-          description: Unauthorized - Invalid API token
+          description: Unauthorized - Invalid token.
         '500':
-          description: Internal Server Error
-
+          description: Internal server error.
       security:
-        - ApiKeyAuth: []  # This API requires an API token for authorization
+        - TokenAuth: []
+        
+  /api/org_details/{org}/:
+    get:
+      summary: Get Organization Details
+      description: Returns details of an organization by its identifier.
+      parameters:
+        - in: path
+          name: org
+          required: true
+          schema:
+            type: string
+          description: Unique identifier of the organization.
+      responses:
+        '200':
+          description: Organization details retrieved successfully.
+        '401':
+          description: Unauthorized - Invalid or missing token.
+        '404':
+          description: Organization not found.
+        '500':
+          description: Server error.
+
+  /api/vendor/connections/:
+    get:
+      summary: Get Vendor Connections
+      description: Returns a list of vendor connections filtered by status.
+      parameters:
+        - in: query
+          name: status
+          required: false
+          schema:
+            type: string
+            enum: [pending, approved, rejected]
+          description: Filter connections by status (e.g., pending, approved).
+      responses:
+        '200':
+          description: A list of vendor connections.
+        '401':
+          description: Unauthorized - Invalid or missing token.
+        '500':
+          description: Internal server error.
+      security:
+        - TokenAuth: []
 
 components:
   securitySchemes:
+    TokenAuth:
+      type: apiKey
+      in: header
+      name: Authorizations
     ApiKeyAuth:
       type: apiKey
       in: header
