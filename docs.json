@@ -58,14 +58,7 @@
                       "docs/api-docs/reference/errors"
                     ]
                   },
-                  {
-                    "group": "Employees",
-                    "pages": [
-                      "docs/api-docs/reference/employees/employee-directory",
-                      "docs/api-docs/reference/employees/get-employee",
-                      "docs/api-docs/reference/employees/update-employee"
-                    ]
-                  },
+
                   {
                     "group": "SDK",
                     "pages": [
@@ -77,9 +70,24 @@
             ]
           },
           {
-            "group": "CRM",
-            "pages": []
-          },
+            "group": "Employees",
+
+                "pages": [
+                  "api-reference/employees/get-employees",
+                  "api-reference/employees/get-employees-v2",
+                  "api-reference/employees/employee-details-api",
+                  "api-reference/employees/get-salary-details",
+                  "api-reference/employees/update-employee-bank-details"
+                ]
+              },
+              {
+                "group": "Organization",
+    
+                    "pages": [
+                      "api-reference/organization/get-organization-details",
+                      "api-reference/organization/get-vendor-connections"
+                    ]
+                  },
           {
             "group": "Expense",
             "pages": []
