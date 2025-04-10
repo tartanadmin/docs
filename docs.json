@@ -48,16 +48,7 @@
               {
                 "group": "Reference",
                 "pages": [
-                  {
-                    "group": "Introduction",
-                    "pages": [
-                      "docs/api-docs/reference/base-url",
-                      "docs/api-docs/reference/pagination",
-                      "docs/api-docs/reference/auth",
-                      "docs/api-docs/reference/headers",
-                      "docs/api-docs/reference/errors"
-                    ]
-                  },
+                  "docs/api-docs/reference/introduction",
                   {
                     "group": "Employees",
                     "pages": [

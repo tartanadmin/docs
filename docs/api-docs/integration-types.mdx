@@ -1,8 +1,120 @@
 ---
 title: 'Integration Types'
-description: 'Different types of HRMS integrations'
+description: 'Tartan offers multiple integration methods to help you establish seamless connections with your client organization. '
 ---
 
-# Integration Types
+# Available Integration Types
 
-Learn about the different types of HRMS integrations supported by Tartan. 
+- HRMS Integration
+- Upload CSV Integration
+- Via SFTP Integration
+- Push API Integration
+- Custom Integration
+
+## HRMS Integration
+   Tartan offers seamless HRMS integration with over 80+ HRMS platforms, ensuring that no matter which system your client organization uses, you’ll receive data in a consistent and unified format.
+   Tartan offers two types of HRMS integrations: Automated and Assisted.
+   ### Automated HRMS Integration
+     With Automated Integration, users can quickly connect by providing API credentials such as an API key or token. Once authenticated, Tartan will initiate an initial data sync for all or selected employees. Afterward, data will sync automatically at a frequency of your choice (defaulting to every Monday at a set time). If you require more frequent updates, you can easily adjust the sync frequency directly from our console.
+
+   ### Assisted HRMS Integration
+    Assisted Integrations are a unique offering from Tartan, where we enable connectivity with your client organisation's HRMS within just 1 week, once we receive the necessary API documentation from you.
+
+    Refer below table below to understand the main differences between the Automated and Assisted integrations.
+   
+
+    |        | Automated Integration | Assisted Integration |
+    | --- | --- | --- |
+    | Coverage | 30+ | 50+ |
+    | Default Data Sync | Weekly | Monthly |
+    | On demand Sync | Yes | Yes |
+    | Setup period| 0 Days | 7 Days | 
+
+
+     Steps to build an HRMS Integration:
+
+<Steps>
+  <Step title="Invite your client organisation">
+    Your client admin receives an email to login to the Tartan console (whitelabeled).<br></br>
+  </Step>
+  <Step title="Client admin selects their HRMS">
+    Your client admin selects their HRMS from the list of supported HRMS platforms.<br></br>
+  </Step>
+  <Step title="Client admin provides API credentials">
+    Your client admin enters the API credentials of their HRMS. If they don't have them, they can refer to the documentation attached on the same screen.
+  </Step>
+  <Step title="Client admin selects data models">
+Your client admin selects the specific data points they wish to share with you across various data models, such as employee details, dependent information, salary data, bank details. 
+</Step>
+ {/* <Step title="Client admin maps the Datapoints">
+ If the Salary data model was enabled in the previous step, the client admin will need to map their salary data points to our JSON format.
+  </Step> */}
+  <Step title ="Client admin completes the journey">
+Finally, the client admin clicks 'Submit,' triggering the initial data sync.  
+</Step>
+</Steps>
+## Upload CSV Integration
+If your client organization doesn’t use an HRMS and instead manages data in CSV files, Tartan offers an easy CSV upload integration. The client admin can upload their CSV, map the column headers, and rectify any errors before sharing (e.g., phone numbers should be 10 digits). The admin won't be able to share the data until all errors are resolved, ensuring that you receive the correct data, eliminating multiple rounds of back-and-forth Via SFTP Integration.
+
+ Steps to build a CSV based Integration:
+<Steps>
+<Step title="Invite your client organisation">
+    Your client admin receives an email to login to the Tartan console (whitelabeled).<br></br>
+  </Step>
+<Step title="Client admin selects upload CSV option">
+ Your client admin selects Upload CSV option from the list of supported integration methods.<br></br>
+</Step>
+<Step title="Client admin maps the column headers with Tartan keys">
+ he client admin associates the CSV column headers with Tartan's corresponding keys<br></br>
+</Step>
+<Step title="Client admin reviews the data">
+The client admin reviews the final data and resolves the validation errors, if any.
+</Step>
+<Step title="Client admin completes the journey">
+Once the client admin reviews the data, client admin submits the initial data dump. For future updates, the client admin can either upload a full load file or only updated records file.
+</Step>
+</Steps>
+
+## Via SFTP Integration
+Tartan supports secure data transfer through SFTP (Secure File Transfer Protocol). If your client organization does not use HRMS and prefers to have their data fetched directly from an SFTP server, Tartan can seamlessly handle the transfer. This integration ensures secure, encrypted data retrieval from the client's SFTP server, facilitating a reliable and efficient way to manage sensitive information during the transfer process.
+Steps to build a SFTP based Integration:
+<Steps> 
+  <Step title="Invite your client organisation">
+    Your client admin receives an email to login to the Tartan console (whitelabeled).
+  </Step>
+  <Step title="Client admin selects SFTP flow option">
+ Your client admin selects SFTP flow option from the list of supported integration methods.
+</Step>
+  <Step title="Client admin enters credentials"> 
+  The client admin can select either the Host URL or IP address method to establish an SFTP connection, providing the necessary details such as file directory, username, password, or private key and data refresh rate for secure authentication.
+  </Step>
+
+<Step title="Client admin maps the column headers with Tartan keys">
+The client admin maps the column headers from the file fetched from their SFTP server to Tartan's corresponding data keys.
+</Step>
+<Step title="Client admin reviews the data">
+The client admin reviews the final data and resolves the validation errors, if any.
+</Step>
+<Step title="Client admin completes the journey">
+Once the client admin reviews the data, they submits the initial data dump.
+</Step>
+ </Steps>
+
+<Note>
+
+File Not Found or Timeout Errors: <br></br>
+- The system will attempt to fetch the file three times as per the refresh schedule.
+- If the file is not received after three attempts, the connection status will be marked as `Failed`. <br></br>
+
+Retry Schedule (For a refresh schedule of 1 day): <br></br>
+
+ - Attempt 1: On the scheduled day.
+- Attempt 2: On the next day.
+- Attempt 3: On the following day.
+
+If the file is received during any attempt, the retry counter resets.
+
+</Note>
+## Push API Integration
+
+## Custom Integration
