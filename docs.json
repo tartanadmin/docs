@@ -14,17 +14,25 @@
         "tab": "Documentation",
         "groups": [
           {
-            "group": "Tartan Sync",
+            "group": "HyperSync",
             "pages": [
-              "docs/hrmssync/What-is-sync",
+              "docs/hrmssync/What-is-sync",        
               "docs/hrmssync/glossary"
             ]
           },
           {
-            "group": "Developer Tools",
+            "group": "HRMS Sync",
             "pages": [
-              "docs/hrmssync/errors",
-              "docs/hrmssync/logs"
+              "docs/hrmssync/Introduction",
+              "docs/hrmssync/Usecases",
+              {
+                "group" : "Offerings",
+                "pages": [
+                  "docs/hrmssync/Console",
+                  "docs/hrmssync/SDK",
+                  "docs/hrmssync/integration-types"
+                ]
+              }
             ]
           },
           {
@@ -48,16 +56,7 @@
               {
                 "group": "Reference",
                 "pages": [
-                  {
-                    "group": "Introduction",
-                    "pages": [
-                      "docs/api-docs/reference/base-url",
-                      "docs/api-docs/reference/pagination",
-                      "docs/api-docs/reference/auth",
-                      "docs/api-docs/reference/headers",
-                      "docs/api-docs/reference/errors"
-                    ]
-                  },
+                  "docs/api-docs/reference/introduction",
                   {
                     "group": "Employees",
                     "pages": [
