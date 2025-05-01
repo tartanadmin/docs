@@ -16,7 +16,7 @@ paths:
           required: true
           schema:
             type: string
-          description: The organization identifier.
+          description: The organization identifier to identify.
         - in: query
           name: page
           required: false
