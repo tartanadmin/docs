@@ -4,7 +4,7 @@ info:
   description: Retrieve a paginated list of employees from the organization.
   version: 1.0.0
 servers:
-  - url: "{{url}}"
+  - url: "https://tnode.tartanhq.com"
 paths:
   /api/employee_list:
     get:
@@ -329,7 +329,7 @@ components:
     TokenAuth:
       type: apiKey
       in: header
-      name: Authorizations
+      name: Authorization
     ApiKeyAuth:
       type: apiKey
       in: header
