@@ -30,7 +30,7 @@
                 "pages": [
                   "docs/hrmssync/Console",
                   "docs/hrmssync/features",
-                  "docs/hrmssync/sdk",
+                  "docs/hrmssync/SDK",
                   "docs/hrmssync/integration-types"
                  
                 ]
