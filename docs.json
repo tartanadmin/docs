@@ -24,7 +24,17 @@
             "group": "HRMS Sync",
             "pages": [
               "docs/hrmssync/Introduction",
-              "docs/hrmssync/Usecases",
+
+              {
+                "group" : "Usecases",
+                "pages": [
+                  "docs/hrmssync/Group-Health-Insurance",
+                  "docs/hrmssync/Corporate-Travel",
+                  "docs/hrmssync/Corporate-Banking",
+                  "docs/hrmssync/Wealth-Management"
+                 
+                ]
+              },
               {
                 "group" : "Offerings",
                 "pages": [
