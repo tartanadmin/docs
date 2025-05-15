@@ -16,8 +16,8 @@
           {
             "group": "HyperSync",
             "pages": [
-              "docs/hrmssync/What-is-sync",        
-              "docs/hrmssync/glossary"
+              "docs/hrmssync/What-is-sync"
+          
             ]
           },
           {
@@ -28,21 +28,16 @@
               {
                 "group" : "Offerings",
                 "pages": [
-                  "docs/hrmssync/Console",
-                  "docs/hrmssync/SDK",
-                  "docs/hrmssync/integration-types"
+                  "docs/hrmssync/console",
+                  "docs/hrmssync/features",
+                  "docs/hrmssync/sdk",
+                  "docs/hrmssync/integration-types",
+                  "docs/hrmssync/webhooks"
                 ]
               }
             ]
-          },
-          {
-            "group": "Resources",
-            "pages": [
-              "docs/hrmssync/unified-apis",
-              "docs/hrmssync/terms-and-conditions",
-              "docs/hrmssync/privacy-policy"
-            ]
           }
+          
         ]
       },
       {
@@ -52,7 +47,7 @@
             "group": "HRMS",
             "pages": [
               "docs/api-docs/introduction",
-              "docs/api-docs/integration-types",
+              
               {
                 "group": "Reference",
                 "pages": [
