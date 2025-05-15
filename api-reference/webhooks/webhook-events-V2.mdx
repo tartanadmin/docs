@@ -1,0 +1,440 @@
+Tartan lets you stay up to date with data changes by using Webhooks. You can easily manage and test webhook events directly through the [Tartan Console](/docs/hrmssync/console), ensuring your integration runs smoothly.
+
+Tartan uses a webhook system to automatically notify your application whenever there’s a change in the source system. Instead of constantly polling the API for updates, you simply set up a secure HTTPS endpoint to receive scheduled webhook from tartan.
+
+
+### Webhook Headers
+
+Webhook headers are bits of information sent along with a webhook request, just like a label on a parcel. They help the receiving server understand who sent the request, what kind of data is inside, and sometimes how to verify it's legit.
+
+
+
+| Header  | Description | 
+    | --- | --- | 
+    | ``` "content-type":"application/json" ``` | Tells about the format of the data (json, etc.) |
+    | ``` "tartan-signature": "xxxxxxxxx" ```  | Security signature to verify authenticity | 
+   
+
+
+**tartan-signature** - To ensure that your API endpoint is verifying that incoming POST requests are from Tartan and not a malicious source, and that payloads haven't been altered in transit.
+
+
+
+The signature is generated using a combination of the secret_key/app_key and the payload data. You can refer to the code snippet below to generate and verify the encoded hash using the [hmac module](https://docs.python.org/3/library/hmac.html) and the sha256 algorithm.
+
+``` python
+import hmac
+import hashlib
+import json
+# Example secret key and message
+app_key = "my_secret_key"
+payload = request.body
+try:
+  tartan_signature = request.headers.get("tartan-signature")
+except KeyError:
+    print('No signature sent, request did not originate from Tartan.')
+    raise
+print("Recieved tartan-signature:", tartan_signature)
+# Generate HMAC digest using SHA256
+hmac_digest = hmac.new(app_key.encode("utf-8"), payload.encode("utf-8"), hashlib.sha256).hexdigest()
+print("Generated HMAC Digest:", hmac_digest)
+# Check if the generated HMAC matches the received one
+if hmac_digest == tartan_signature:
+    print("HMAC verified successfully!")
+else:
+    print("HMAC verification failed!")
+    ```
+
+<font color='#883AEE'>`POST` </font> 
+
+### Webhook events 
+
+Once you've set up your webhook URL via our [console](docs/hrmssync/console") or with help from your Tartan SPOC, you'll start receiving webhook events from Tartan.
+
+You can choose which events you'd like to receive from the [Webhook Events](docs/hrmssync/console") section. Once configured, Tartan will begin sending only those selected events to your endpoint.
+
+
+| Webhook Key  | Description | 
+    | --- | --- | 
+    | syncSessionId |Represents the unique sessionID for the sync session associated with this webhook. |
+    | webhookCounter | Security signature to verify authenticity | 
+    | requestId | Security signature to verify authenticity | 
+    | orgId | Represents the orgID of the corporate associated with this webhook. | 
+    | event |  | 
+    | eventType | Security signature to verify authenticity | 
+    | recordCount | Denotes the total number of employee records in this webhook. | 
+    | orgName | Name of the org associated with this webhook. | 
+    | hrms | The source HRMS | 
+    | status | Security signature to verify authenticity | 
+    | invitedBy | Email of the user who sent the invite. |
+    | acceptedBy | Email of the user who accepted the invite. | 
+    | terminatedBy | Email of the user who terminated the connection.| 
+    | remote_org_id | An optional unique identifier | 
+    | timeStamp | Timestamp of the webhook in UTC | 
+    | vendor.orgId | Your organisation ID | 
+    | body| Contains employee record data received from the source. | 
+    | statusCode| status | 
+    | newRecords| Represents the expected total number of new records in this session. |
+    | updatedRecords| Represents the expected total number of updates in the existing records in this session. |
+
+
+
+### Test Webhook event  
+This event can be used to test the webhook functionality.
+
+```json
+{
+    "syncSessionId": "adsfbddfbvczdvfx",
+    "webhookCounter": 1,
+    "requestId": "2dfe7ed1-a6f1-904b-ab4e-1a752484490w",
+    "orgId": "f47ac10b-58cc-4372-a567-0e02b2c3d479",
+    "event": "test.event",
+    "eventType": "test.event",
+    "recordCount": null,
+    "body": [],
+    "timeStamp": "2025-05-15 02:31:14",
+    "statusCode": "200",
+    "message": "success",
+    "vendor.orgId": "3fa85f64-5717-4562-b3fc-2c963f66afa6"
+}
+```
+
+### POST Connection Requested
+
+
+This event is triggered when a corporate is invited to establish a connection either through the console or by calling the [Generate SDK token](/api-reference/sdk/get-sdk-token) API.
+
+``` json
+{
+  "syncSessionId": "bhkjqhg6662bkkjbwwfwj",
+  "webhookCounter": 1,
+  "requestId": "4cfe72cd-a6f1-464b-ab4e-5a752484435e",
+  "orgId": "f47ac10b-58cc-4372-a567-0e02b2c3d479",
+  "event": "connection.events.requested",
+  "eventType": "connection.events",
+  "recordCount": 1,
+  "body": [
+    {
+      "orgId": "f47ac10b-58cc-4372-a567-0e02b2c3d479",
+      "orgName": "Intellect Design Pvt Ltd",
+      "orgCin": null,
+      "hrms": null,
+      "status": "CONNECTION_INVITED",
+      "invitedBy": "ankur@tartanhq.com",
+      "acceptedBy": null,
+      "terminatedBy": null,
+      "remote_org_id": "afesgvbfojsdfdogfauwr"
+    }
+  ],
+  "timeStamp": "2025-05-15 03:11:10",
+  "statusCode": "200",
+  "message": "success",
+  "vendor.orgId": "3fa85f64-5717-4562-b3fc-2c963f66afa6"
+}
+```
+
+
+### POST Connection Accepted
+
+This event is triggered when your corporate admin completes the jounrey by submitting the [data models, redirect to journey exp page](api-reference/sdk/get-sdk-token).  
+
+```json
+
+{
+  "syncSessionId": "vknsbflxvnzbfbnodzk",
+  "webhookCounter": 1,
+  "requestId": "6e63d444-72e4-4dc6-9ff7-50eededb8295",
+  "orgId": "f47ac10b-58cc-4372-a567-0e02b2c3d479",
+  "event": "connection.events.accepted",
+  "eventType": "connection.events",
+  "recordCount": 1,
+  "body": [
+    {
+      "orgId": "f47ac10b-58cc-4372-a567-0e02b2c3d479",
+      "orgName": "Intellect Design Pvt Ltd",
+      "orgCin": null,
+      "hrms": 1,
+      "status": "CONNECTION_ACCEPTED",
+      "invitedBy": null,
+      "acceptedBy": "prashant@intellectdesign.com",
+      "terminatedBy": null,
+      "remote_org_id": "afesgvbfojsdfdogfauwr"
+    }
+  ],
+  "timeStamp": "2025-05-15 03:18:10",
+  "statusCode": "200",
+  "message": "success",
+  "vendor.orgId": "3fa85f64-5717-4562-b3fc-2c963f66afa6"
+}
+```
+
+### POST Connection Failed  
+This event is triggered when an issue occurs while retrieving data from the source system.
+
+```json
+{
+    "syncSessionId": "qwqqsdkvsdnvewzxc",
+    "webhookCounter": 1,
+    "requestId": "8q3d414-02a4-9ca6-9ff7-10eededb8342",
+    "orgId": "f47ac10b-58cc-4372-a567-0e02b2c3d479",
+    "event": "connection.events.failed",
+    "eventType": "connection.events",
+    "recordCount": null,
+    "body": [
+    {
+        "orgId": "f47ac10b-58cc-4372-a567-0e02b2c3d479",
+        "orgName": "Intellect Design Pvt Ltd",
+        "orgCin": "",
+        "hrms": 1,
+        "status": "CONNECTION_FAILED",
+        "invitedBy": null,
+        "acceptedBy": null,
+        "terminatedBy": null,
+        "remote_org_id": "kjbkfjbhdhkjwk"
+    }
+    ],
+    "timeStamp": "2025-05-15 03:18:36",
+    "statusCode":"200",
+    "message": "success",
+    "vendor.orgId": "3fa85f64-5717-4562-b3fc-2c963f66afa6"
+}
+```
+
+### POST Connection terminated
+This event is triggered when client or corporate terminates the connection either from console or using the [terminate connection API](/api-reference/sdk/terminate-connection). 
+
+```json
+{
+    "syncSessionId": "afdsbijodkxdjsdvbioj",
+    "webhookCounter": 1,
+    "requestId": "3ddd414-12d4-2la6-9ff7-10dvwedb8123",
+    "orgId": "f47ac10b-58cc-4372-a567-0e02b2c3d479",
+    "event": "connection.events.terminated",
+    "eventType": "connection.events",
+    "recordCount": null,
+    "body": [
+    {
+        "orgId": "f47ac10b-58cc-4372-a567-0e02b2c3d479",
+        "orgName": "Intellect Design Pvt Ltd",
+        "orgCin": "",
+        "hrms": 1,
+        "status": "CONNECTION_TERMINATED",
+        "invitedBy": null,
+        "acceptedBy": null,
+        "terminatedBy": "prashant@intellectdesign.com",
+        "remote_org_id": "kjbkfjbhdhkjwk"
+    }
+    ],
+    "timeStamp": "2024-11-25 07:34:38",
+    "statusCode":"200",
+    "message": "success",
+    "vendor.orgId": "3fa85f64-5717-4562-b3fc-2c963f66afa6"
+}
+```
+
+### POST Sync Initiated  
+This event is triggered once the connection is accepted and data syncing begins (initial sync). It provides the total number of new employee records and updates to existing records (if any). If a scheduled sync finds no new or updated records from the source, the event will be triggered with "newRecords": 0 and "updatedRecords": 0  
+
+```json
+{
+  "syncSessionId": "dsfdbgklvboknbsx",
+  "webhookCounter": 1,
+  "requestId": "6754fec7-d3db-458a-942b-85bfc5822c82",
+  "orgId": "f47ac10b-58cc-4372-a567-0e02b2c3d479",
+  "event": "sync.events.initiated",
+  "eventType": "sync.events",
+  "recordCount": null,
+  "body": [
+    {
+      "newRecords": 6,
+      "updatedRecords": 0
+    }
+  ],
+  "timeStamp": "2025-05-25 03:18:30",
+  "statusCode": "200",
+  "message": "success",
+  "vendor.orgId": "3fa85f64-5717-4562-b3fc-2c963f66afa6"
+}
+```
+### POST Employee add
+
+This event is triggered when the initial batch of employee data is received from the source. Each webhook contains a maximum of 10 employee records. For example, if there are 105 employees in the source, 11 webhooks will be triggered — 10 with 10 records each, and the 11th with the remaining 5 records.
+
+```json
+{
+    "syncSessionId": "adfsbvdzfbsvzd",
+    "webhookCounter": 1,
+    "requestId": "b7cc9282-3587-4403-8589-fd0e9f87cf97",
+    "orgId": "f47ac10b-58cc-4372-a567-0e02b2c3d479",
+    "vendor.orgId": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+    "event": "sync.events.employee.add",
+    "eventType": "sync.events.initial",
+    "recordCount": 10,
+    "body": ["Array of Objects with each object containing an employee record"],
+    "timeStamp": "",
+    "statusCode":"200",
+    "message":"success"
+}
+```
+**Sample employee record**  
+
+Below is a sample employee object included in the array provided in the above webhook.
+
+```json
+{
+  "name": "Manish Gupta",
+  "email": "manish@tartanhq.com",
+  "doj": "2021-06-01",
+  "status": "Active",
+  "employmentType": "Permanent",
+  "gender": "Male",
+  "id": "7",
+  "employeeId": "5",
+  "dob": "1983-06-08",
+  "pan": "************",
+  "personalEmail": "manish.gupta@gmail.com",
+  "fatherName": "Ritesh Gupta",
+  "bloodGroup": "AB +ve",
+  "designation": "NOT AVAILABLE",
+  "department": "Engineering",
+  "mobileNumber": "************",
+  "manager": "Meet Semlani",
+  "maritalStatus": "Married",
+  "nationality": "Indian",
+  "aadhar": "************",
+  "uan": "************",
+  "terminationDate": "",
+  "grade": "D-3",
+  "groupName": "NOT AVAILABLE",
+  "costCenter": "NOT AVAILABLE",
+  "managerEmail": "shreesh@tartanhq.com",
+  "managerEmail2": "NOT AVAILABLE",
+  "managerEmail3": "NOT AVAILABLE",
+  "managerEmail4": "NOT AVAILABLE",
+  "managerEmail5": "NOT AVAILABLE",
+  "companyName": "TartanHQ",
+  "bankDetails": {
+    "accountNumber": "************",
+    "ifscCode": "************",
+    "bankName": "SBI"
+  },
+  "currentAddress": {
+    "addressPincode": "560080",
+    "addressCity": "Banglore",
+    "addressCountry": "India",
+    "addressState": "Karnataka",
+    "addressLine": "Sadashiva Nagar Armane Nagar"
+  },
+  "permanentAddress": {
+    "addressPincode": "226001",
+    "addressCity": "Luknow",
+    "addressCountry": "India",
+    "addressState": "Uttar Pradesh",
+    "addressLine": "Yarana Nagar Luknow"
+  },
+  "jobLocation": {
+    "pincode": "NOT AVAILABLE",
+    "city": "Gurugram"
+  },
+  "dependentDetails": [
+    {
+      "dob": "NOT AVAILABLE",
+      "email": "sohan.negi01@gmail.com",
+      "gender": "Male",
+      "mobileNumber": "NOT AVAILABLE",
+      "name": "Sohan Negi",
+      "profession": "NOT AVAILABLE",
+      "relation": "Father"
+    }
+  ],
+  "salaryDetails": {
+    "ctc": {
+      "basic": 50000,
+      "dearnessAllowance": 9000.9,
+      "hra": 25000.5,
+      "gratuity": 2000.7,
+      "medicalAllowance": 2000.7,
+      "travelAllowance": 2000.7,
+      "specialAllowance": null,
+      "flexiBasketAllowance": null,
+      "grossPay": null,
+      "bonus": {
+        "joining": 80000,
+        "referral": null,
+        "retention": null,
+        "performance": null,
+        "relocation": null,
+        "misc": null
+      },
+      "deductions": {
+        "pf": 1800,
+        "esi": null,
+        "professionalTax": null,
+        "labourWelfareFund": null,
+        "misc": null
+      }
+    }
+  }
+}
+```
+
+### POST Delta employee add
+This event is triggered during a scheduled sync when new employee records are retrieved from the source. It contains only those records that were added after the initial sync.
+
+```json
+{
+    "syncSessionId": "dfsbdgvbgdvbd",
+    "webhookCounter": 1,
+    "requestId": "f2ebc662-b849-4987-a6c7-8941b9d02964",
+    "orgId": "f47ac10b-58cc-4372-a567-0e02b2c3d479",
+    "vendor.orgId": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+    "event": "sync.events.employee.add",
+    "eventType": "sync.events.delta",
+    "recordCount": 10,
+    "body": ["Array of Objects with each object containing an employee record"],
+    "timeStamp": "2025-05-26 03:18:30",
+    "statusCode":"200",
+    "message":"Success"
+}
+```
+
+### POST Delta employee update
+This event is triggered during a scheduled sync when updates for existing employee records are retrieved from the source. It contains only those records that were added after the initial sync. The response contains the complete employee records with updated values for the changed fields.
+
+```json
+{
+    "syncSessionId": "fdsbdgfvvdsd",
+    "webhookCounter": 1,
+    "requestId": "b7cc9282-3587-4403-8589-fd0e9f87cf97",
+    "orgId": "f47ac10b-58cc-4372-a567-0e02b2c3d479",
+    "event": "sync.events.employee.update",
+    "eventType": "sync.events.delta",
+    "recordCount": 1,
+    "body": ["Array of Objects with each object containing an employee record"],
+    "timeStamp": "2025-05-26 03:19:30",
+    "statusCode": "200",
+    "message": "success",
+    "vendor.orgId": "3fa85f64-5717-4562-b3fc-2c963f66afa6"
+}
+```
+
+### POST Sync completed
+
+This event is triggered when all the employee records are retrived and synced from the source successfully. 
+
+```json
+{
+    "syncSessionId": "fdsbdgfvvdsd",
+    "webhookCounter": 1,
+    "requestId": "8bccd5e2-fbcc-411d-9022-1b351dfef5fa",
+    "orgId": "f47ac10b-58cc-4372-a567-0e02b2c3d479",
+    "event": "sync.events.completed",
+    "eventType": "sync.events",
+    "recordCount": null,
+    "body": [],
+    "timeStamp": "2024-11-26 12:00:19",
+    "statusCode": "200",
+    "message": "success",
+    "vendor.orgId": "3fa85f64-5717-4562-b3fc-2c963f66afa6"
+}
+```
