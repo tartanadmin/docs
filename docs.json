@@ -31,8 +31,8 @@
                   "docs/hrmssync/console",
                   "docs/hrmssync/features",
                   "docs/hrmssync/sdk",
-                  "docs/hrmssync/integration-types",
-                  "docs/hrmssync/webhooks"
+                  "docs/hrmssync/integration-types"
+                 
                 ]
               }
             ]
@@ -74,6 +74,13 @@
                     "pages": [
                       "api-reference/organization/get-organization-details",
                       "api-reference/organization/get-vendor-connections"
+                    ]
+                  },
+                  {
+                    "group": "Webhooks",
+                    "pages": [
+                      "api-reference/webhooks/webhook-events",
+                      "api-reference/webhooks/webhook-events-V2"
                     ]
                   }
                 ]
