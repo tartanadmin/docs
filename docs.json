@@ -28,7 +28,7 @@
               {
                 "group" : "Offerings",
                 "pages": [
-                  "docs/hrmssync/console",
+                  "docs/hrmssync/Console",
                   "docs/hrmssync/features",
                   "docs/hrmssync/sdk",
                   "docs/hrmssync/integration-types"
