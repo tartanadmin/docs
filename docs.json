@@ -16,8 +16,8 @@
           {
             "group": "HyperSync",
             "pages": [
-              "docs/hrmssync/What-is-sync",        
-              "docs/hrmssync/glossary"
+              "docs/hrmssync/What-is-sync"
+          
             ]
           },
           {
@@ -36,15 +36,8 @@
                 ]
               }
             ]
-          },
-          {
-            "group": "Resources",
-            "pages": [
-            
-              "docs/hrmssync/terms-and-conditions",
-              "docs/hrmssync/privacy-policy"
-            ]
           }
+          
         ]
       },
       {

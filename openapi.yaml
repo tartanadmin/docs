@@ -296,7 +296,7 @@ paths:
       security:
         - TokenAuth: []
 
-  /api/terminate_connection:
+  /api/terminate_connection/:
     post:
       summary: Terminate Connection
       description: Terminates an existing vendor-client connection.
