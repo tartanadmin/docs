@@ -203,7 +203,110 @@ paths:
           description: Internal server error.
       security:
         - TokenAuth: []
-        
+
+  /api/v1/employee/consent-data/:
+    post:
+      summary: Submit Employee Consent Data
+      description: API to submit or update employee consent data.
+      security:
+        - TokenAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                org:
+                  type: string
+                  format: uuid
+                  description: Organization UUID
+                  example: 9e3ba089-5cb6-407c-93db-e3b7ccaff3ed
+                employee_id:
+                  type: string
+                  description: Unique employee ID within the organization
+                  example: "0078"
+                consent_language:
+                  type: string
+                  description: Consent statement or text given by the employee
+                  example: "I have new consent."
+                consent_timestamp:
+                  type: string
+                  format: date-time
+                  description: Timestamp when the consent was given
+                  example: "2024-11-20T10:30:00Z"
+                consent_expiry:
+                  type: string
+                  format: date-time
+                  description: Consent expiration datetime
+                  example: "2024-11-28T10:30:00Z"
+              required:
+                - org
+                - employee_id
+                - consent_language
+                - consent_timestamp
+                - consent_expiry
+      responses:
+        '200':
+          description: Consent data submitted successfully
+        '400':
+          description: Bad request (validation errors)
+        '401':
+          description: Unauthorized (invalid or missing token)
+
+  /api/v2/salary_details/{employee_id}/:
+    get:
+      summary: Get Employee Salary Details
+      description: Retrieve the salary details of a specific employee using employee ID.
+      security:
+        - TokenAuth: []
+      parameters:
+        - name: employee_id
+          in: path
+          required: true
+          schema:
+            type: string
+          description: Unique employee ID
+          example: "0078"
+        - name: org
+          in: query
+          required: true
+          schema:
+            type: string
+            format: uuid
+          description: Organization UUID
+          example: 9e3ba089-5cb6-407c-93db-e3b7ccaff3ed
+        - name: vendor_org
+          in: query
+          required: true
+          schema:
+            type: string
+            format: uuid
+          description: Vendor Organization UUID
+          example: 5e3bc089-1cb6-507c-23db-f3b7ccaff3ed
+        - name: type
+          in: query
+          required: true
+          schema:
+            type: string
+            enum: [ctc, net, gross]
+          description: Type of salary details to fetch (e.g., ctc, net, gross)
+          example: ctc
+      responses:
+        '200':
+          description: Salary details retrieved successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                description: Employee salary details object (structure as per system)
+        '400':
+          description: Bad request (missing or invalid parameters)
+        '401':
+          description: Unauthorized (invalid or missing token)
+        '404':
+          description: Employee not found
+
   /api/org_details/{org}/:
     get:
       summary: Get Organization Details
@@ -323,6 +426,7 @@ paths:
           description: Internal server error.
       security:
         - TokenAuth: []
+
 
 components:
   securitySchemes:
