@@ -31,7 +31,9 @@
                   "docs/hrmssync/Group-Health-Insurance",
                   "docs/hrmssync/Corporate-Travel",
                   "docs/hrmssync/Corporate-Banking",
-                  "docs/hrmssync/Wealth-Management"
+                  "docs/hrmssync/Wealth-Management",
+                  "docs/hrmssync/Employee-Benefits",
+                  "docs/hrmssync/Background-Verification"
                  
                 ]
               },
