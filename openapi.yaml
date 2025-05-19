@@ -427,6 +427,61 @@ paths:
       security:
         - TokenAuth: []
 
+  /api/webhooks/resend:
+    post:
+      summary: Resend a failed webhook
+      description: Allows you to resend a failed webhook based on status and timestamp.
+      operationId: resendWebhook
+      tags:
+        - Webhooks
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                status:
+                  type: string
+                  enum: [fail]
+                  example: fail
+                request_timestamp:
+                  type: string
+                  format: date-time
+                  example: "2024-01-23 12:03:14"
+                request_id:
+                  type: string
+                  nullable: true
+                  example: null
+                webhook_id:
+                  type: string
+                  nullable: true
+                  example: null
+              required:
+                - status
+                - request_timestamp
+      security:
+        - TokenAuth: []
+      responses:
+        '200':
+          description: Webhook resend request accepted
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    example: true
+                  message:
+                    type: string
+                    example: Webhook resend triggered successfully.
+        '400':
+          description: Invalid request payload
+        '401':
+          description: Unauthorized – Invalid token
+        '500':
+          description: Server error
 
 components:
   securitySchemes:
