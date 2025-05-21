@@ -300,7 +300,6 @@ paths:
                     type: string
                     nullable: true
                     example: null
-
       security:
         - TokenAuth: []
   
@@ -881,7 +880,6 @@ paths:
                     type: string
                     nullable: true
                     example: null
-
       security:
         - TokenAuth: []
 
@@ -911,7 +909,7 @@ paths:
           description: The organization identifier.
       responses:
         '200':
-
+          description: Updates the bank details for a specific employee.
       security:
         - ApiKeyAuth: []
 
@@ -1277,28 +1275,28 @@ paths:
                           city:
                             type: string
                             example: NOT AVAILABLE
-          '400':
-            description: Bad Request – Validation Error
-            content:
-              application/json:
-                schema:
-                  type: object
-                  properties:
-                    requestId:
-                      type: string
-                      example: 8fae81c0-194c-45a2-a077-e6e4fc3fb6d1
-                    message:
-                      type: string
-                      example: error
-                    data:
-                      type: object
-                      properties:
-                        consent_expiry:
-                          type: array
-                          items:
-                            type: string
-                          example:
-                            - The consent expiry timestamp must be in the future. Please provide a valid timestamp.
+        '400':
+          description: Bad Request – Validation Error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  requestId:
+                    type: string
+                    example: 8fae81c0-194c-45a2-a077-e6e4fc3fb6d1
+                  message:
+                    type: string
+                    example: error
+                  data:
+                    type: object
+                    properties:
+                      consent_expiry:
+                        type: array
+                        items:
+                          type: string
+                        example:
+                          - The consent expiry timestamp must be in the future. Please provide a valid timestamp.
         '404':
           description: Not Found – Employee not found
           content:
@@ -1350,7 +1348,6 @@ paths:
                     type: string
                     nullable: true
                     example: null
-
 
   /api/v2/salary_details/{employee_id}/:
     get:
@@ -1515,41 +1512,40 @@ paths:
                           type: string
                         example:
                           - This field is required.
-          '401':
-            description: Unauthorized – Authentication credentials missing
-            content:
-              application/json:
-                schema:
-                  type: object
-                  properties:
-                    requestId:
-                      type: string
-                      example: 1ef741b0-45b9-419e-a7f8-9c4cc77e1f61
-                    message:
-                      type: string
-                      example: Authentication credentials were not provided.
-                    data:
-                      type: string
-                      nullable: true
-                      example: null
-
-            '404':
-              description: Not Found – Salary details not shared
-              content:
-                application/json:
-                  schema:
-                    type: object
-                    properties:
-                      requestId:
-                        type: string
-                        example: bf421cd7-fc71-4ad3-843d-8b3294484260
-                      message:
-                        type: string
-                        example: Salary Details are not shared
-                      data:
-                        type: string
-                        nullable: true
-                        example: null
+        '401':
+          description: Unauthorized – Authentication credentials missing
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  requestId:
+                    type: string
+                    example: 1ef741b0-45b9-419e-a7f8-9c4cc77e1f61
+                  message:
+                    type: string
+                    example: Authentication credentials were not provided.
+                  data:
+                    type: string
+                    nullable: true
+                    example: null
+        '404':
+          description: Not Found – Salary details not shared
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  requestId:
+                    type: string
+                    example: bf421cd7-fc71-4ad3-843d-8b3294484260
+                  message:
+                    type: string
+                    example: Salary Details are not shared
+                  data:
+                    type: string
+                    nullable: true
+                    example: null
         '500':
           description: Internal Server Error
           content:
@@ -1788,24 +1784,6 @@ paths:
                         application_connection_status:
                           type: string
                           example: "Active"
-          '401':
-            description: Invalid status provided
-            content:
-              application/json:
-                schema:
-                  type: object
-                  properties:
-                    message:
-                      type: string
-                      example: error
-                    data:
-                      type: object
-                      properties:
-                        status:
-                          type: array
-                          items:
-                            type: string
-                          example: ["Invalid status"]
         '401':
           description: Unauthorized - Invalid token
           content:
@@ -1838,7 +1816,6 @@ paths:
                   data:
                     type: "null"
                     nullable: true
-
       security:
         - TokenAuth: []
 
@@ -1945,8 +1922,7 @@ paths:
                   data:
                     type: "null"
                     nullable: true
-
-          security:
+      security:
         - TokenAuth: []
 
   /api/terminate_connection/:
@@ -1992,23 +1968,22 @@ paths:
                   data:
                     type: "null"
                     nullable: true
-
-          '401':
-            description: Unauthorized - Authentication credentials were not provided
-            content:
-              application/json:
-                schema:
-                  type: object
-                  properties:
-                    requestId:
-                      type: string
-                      example: 9a0fe854-d7e9-468c-86a0-e2c34ffcdb6f
-                    message:
-                      type: string
-                      example: Authentication credentials were not provided.
-                    data:
-                      type: "null"
-                      nullable: true
+        '401':
+          description: Unauthorized - Authentication credentials were not provided
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  requestId:
+                    type: string
+                    example: 9a0fe854-d7e9-468c-86a0-e2c34ffcdb6f
+                  message:
+                    type: string
+                    example: Authentication credentials were not provided.
+                  data:
+                    type: "null"
+                    nullable: true
         '404':
           description: Not Found - No organisation found with the given client_org
           content:
@@ -2057,8 +2032,6 @@ paths:
                   data:
                     nullable: true
                     type: "null"
-
-
       security:
         - TokenAuth: []
 
