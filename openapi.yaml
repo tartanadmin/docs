@@ -4,7 +4,11 @@ info:
   description: Retrieve a paginated list of employees from the organization.
   version: 1.0.0
 servers:
-  - url: "https://tnode.tartanhq.com"
+  - url: https://{env}.tartanhq.com
+    description: Dynamic environment-based server
+    variables:
+      env:
+        default: dev
 paths:
   /api/employee_list:
     get:
@@ -31,13 +35,275 @@ paths:
           description: Number of employees to return per page.
       responses:
         '200':
-          description: A list of employees
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  requestId:
+                    type: string
+                    example: 0712451b-6672-4293-a7a6-6b75f5b15590
+                  message:
+                    type: string
+                    example: success
+                  pageInfo:
+                    type: object
+                    properties:
+                      totalPages:
+                        type: integer
+                        example: 4
+                      totalItems:
+                        type: integer
+                        example: 97
+                      items:
+                        type: integer
+                        example: 25
+                      next:
+                        type: boolean
+                        example: true
+                      previous:
+                        type: boolean
+                        example: false
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        name:
+                          type: string
+                        email:
+                          type: string
+                          nullable: true
+                        doj:
+                          type: string
+                          format: date
+                        status:
+                          type: string
+                        employmentType:
+                          type: string
+                          nullable: true
+                        gender:
+                          type: string
+                        id:
+                          type: string
+                        employeeId:
+                          type: string
+                        dob:
+                          type: string
+                          nullable: true
+                          format: date
+                        pan:
+                          type: string
+                          nullable: true
+                          example: ADFTR7654O
+                        personalEmail:
+                          type: string
+                          nullable: true
+                        fatherName:
+                          type: string
+                          nullable: true
+                        bloodGroup:
+                          type: string
+                          nullable: true
+                        designation:
+                          type: string
+                        department:
+                          type: string
+                        mobileNumber:
+                          type: string
+                        manager:
+                          type: string
+                        maritalStatus:
+                          type: string
+                          nullable: true
+                        nationality:
+                          type: string
+                          nullable: true
+                        aadhar:
+                          type: string
+                          nullable: true
+                        uan:
+                          type: string
+                          nullable: true
+                        terminationDate:
+                          type: string
+                          nullable: true
+                          format: date
+                        grade:
+                          type: string
+                        groupName:
+                          type: string
+                        costCenter:
+                          type: string
+                        managerEmail:
+                          type: string
+                        managerEmail2:
+                          type: string
+                        managerEmail3:
+                          type: string
+                        managerEmail4:
+                          type: string
+                        managerEmail5:
+                          type: string
+                        companyName:
+                          type: string
+                        bankDetails:
+                          type: object
+                          properties:
+                            accountNumber:
+                              type: string
+                              nullable: true
+                            ifscCode:
+                              type: string
+                              nullable: true
+                            bankName:
+                              type: string
+                              nullable: true
+                        currentAddress:
+                          type: object
+                          properties:
+                            addressCountry:
+                              type: string
+                              nullable: true
+                            addressCity:
+                              type: string
+                              nullable: true
+                            addressPincode:
+                              type: string
+                              nullable: true
+                            addressLine:
+                              type: string
+                            addressState:
+                              type: string
+                              nullable: true
+                        permanentAddress:
+                          type: object
+                          properties:
+                            addressCountry:
+                              type: string
+                              nullable: true
+                            addressCity:
+                              type: string
+                              nullable: true
+                            addressPincode:
+                              type: string
+                              nullable: true
+                            addressLine:
+                              type: string
+                            addressState:
+                              type: string
+                              nullable: true
+                        dependentDetails:
+                          type: array
+                          items:
+                            type: object
+                            properties:
+                              profession:
+                                type: string
+                                nullable: true
+                              gender:
+                                type: string
+                                nullable: true
+                              name:
+                                type: string
+                              mobileNumber:
+                                type: string
+                              relation:
+                                type: string
+                              email:
+                                type: string
+                              dob:
+                                type: string
+                        jobLocation:
+                          type: object
+                          properties:
+                            city:
+                              type: string
+                            pincode:
+                              type: string
+        '400':
+          description: Bad Request - Missing required query parameters
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  requestId:
+                    type: string
+                    example: d28dfd7b-d9f3-40b6-86c8-eb1684bcdf0e
+                  message:
+                    type: string
+                    example: error
+                  data:
+                    type: object
+                    properties:
+                      page:
+                        type: array
+                        items:
+                          type: string
+                        example: ["This field is required."]
+                      size:
+                        type: array
+                        items:
+                          type: string
+                        example: ["This field is required."]
+                      org:
+                        type: array
+                        items:
+                          type: string
+                        example: ["This field is required."]
         '401':
           description: Unauthorized - Invalid or missing token
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  requestId:
+                    type: string
+                    example: 5eb3b3f9-6d8c-49c2-9b12-1027b8a6af58
+                  message:
+                    type: string
+                    example: Invalid token.
+                  data:
+                    type: string
+                    nullable: true
+                    example: null
+        '424':
+          description: Forbidden - Source permission denied
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: Source Permission denied
+                  data:
+                    type: object
+                    example: {}
         '500':
-          description: Server error
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  requestId:
+                    type: string
+                    example: be2915d5-fc30-4d13-bcca-3d62aefac2a0
+                  message:
+                    type: string
+                    example: Internal Server Error
+                  data:
+                    type: string
+                    nullable: true
+                    example: null
+
       security:
         - TokenAuth: []
+  
   /api/v2/employee_list:
     get:
       summary: Get Employee List (v2)
@@ -82,11 +348,271 @@ paths:
           description: Filter in the format `field:value`, e.g., `status:active`.
       responses:
         '200':
-          description: A filtered and paginated list of employees.
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  requestId:
+                    type: string
+                    example: 0712451b-6672-4293-a7a6-6b75f5b15590
+                  message:
+                    type: string
+                    example: success
+                  pageInfo:
+                    type: object
+                    properties:
+                      totalPages:
+                        type: integer
+                        example: 4
+                      totalItems:
+                        type: integer
+                        example: 97
+                      items:
+                        type: integer
+                        example: 25
+                      next:
+                        type: boolean
+                        example: true
+                      previous:
+                        type: boolean
+                        example: false
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        name:
+                          type: string
+                        email:
+                          type: string
+                          nullable: true
+                        doj:
+                          type: string
+                          format: date
+                        status:
+                          type: string
+                        employmentType:
+                          type: string
+                          nullable: true
+                        gender:
+                          type: string
+                        id:
+                          type: string
+                        employeeId:
+                          type: string
+                        dob:
+                          type: string
+                          nullable: true
+                          format: date
+                        pan:
+                          type: string
+                          nullable: true
+                          example: ADFTR7654O
+                        personalEmail:
+                          type: string
+                          nullable: true
+                        fatherName:
+                          type: string
+                          nullable: true
+                        bloodGroup:
+                          type: string
+                          nullable: true
+                        designation:
+                          type: string
+                        department:
+                          type: string
+                        mobileNumber:
+                          type: string
+                        manager:
+                          type: string
+                        maritalStatus:
+                          type: string
+                          nullable: true
+                        nationality:
+                          type: string
+                          nullable: true
+                        aadhar:
+                          type: string
+                          nullable: true
+                        uan:
+                          type: string
+                          nullable: true
+                        terminationDate:
+                          type: string
+                          nullable: true
+                          format: date
+                        grade:
+                          type: string
+                        groupName:
+                          type: string
+                        costCenter:
+                          type: string
+                        managerEmail:
+                          type: string
+                        managerEmail2:
+                          type: string
+                        managerEmail3:
+                          type: string
+                        managerEmail4:
+                          type: string
+                        managerEmail5:
+                          type: string
+                        companyName:
+                          type: string
+                        bankDetails:
+                          type: object
+                          properties:
+                            accountNumber:
+                              type: string
+                              nullable: true
+                            ifscCode:
+                              type: string
+                              nullable: true
+                            bankName:
+                              type: string
+                              nullable: true
+                        currentAddress:
+                          type: object
+                          properties:
+                            addressCountry:
+                              type: string
+                              nullable: true
+                            addressCity:
+                              type: string
+                              nullable: true
+                            addressPincode:
+                              type: string
+                              nullable: true
+                            addressLine:
+                              type: string
+                            addressState:
+                              type: string
+                              nullable: true
+                        permanentAddress:
+                          type: object
+                          properties:
+                            addressCountry:
+                              type: string
+                              nullable: true
+                            addressCity:
+                              type: string
+                              nullable: true
+                            addressPincode:
+                              type: string
+                              nullable: true
+                            addressLine:
+                              type: string
+                            addressState:
+                              type: string
+                              nullable: true
+                        dependentDetails:
+                          type: array
+                          items:
+                            type: object
+                            properties:
+                              profession:
+                                type: string
+                                nullable: true
+                              gender:
+                                type: string
+                                nullable: true
+                              name:
+                                type: string
+                              mobileNumber:
+                                type: string
+                              relation:
+                                type: string
+                              email:
+                                type: string
+                              dob:
+                                type: string
+                        jobLocation:
+                          type: object
+                          properties:
+                            city:
+                              type: string
+                            pincode:
+                              type: string
+        '400':
+          description: Bad Request - Missing required query parameters
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  requestId:
+                    type: string
+                    example: d28dfd7b-d9f3-40b6-86c8-eb1684bcdf0e
+                  message:
+                    type: string
+                    example: error
+                  data:
+                    type: object
+                    properties:
+                      page:
+                        type: array
+                        items:
+                          type: string
+                        example: ["This field is required."]
+                      size:
+                        type: array
+                        items:
+                          type: string
+                        example: ["This field is required."]
+                      org:
+                        type: array
+                        items:
+                          type: string
+                        example: ["This field is required."]
         '401':
-          description: Unauthorized - Invalid or missing token.
+          description: Unauthorized - Invalid or missing token
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  requestId:
+                    type: string
+                    example: 5eb3b3f9-6d8c-49c2-9b12-1027b8a6af58
+                  message:
+                    type: string
+                    example: Invalid token.
+                  data:
+                    type: string
+                    nullable: true
+                    example: null
+        '424':
+          description: Forbidden - Source permission denied
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: Source Permission denied
+                  data:
+                    type: object
+                    example: {}
         '500':
-          description: Server error.
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  requestId:
+                    type: string
+                    example: be2915d5-fc30-4d13-bcca-3d62aefac2a0
+                  message:
+                    type: string
+                    example: Internal Server Error
+                  data:
+                    type: string
+                    nullable: true
+                    example: null
       security:
         - TokenAuth: []
 
@@ -109,13 +635,253 @@ paths:
           description: The organization identifier.
       responses:
         '200':
-          description: Employee details retrieved successfully.
+          description: Employee details retrieved successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  requestId:
+                    type: string
+                    example: f6e80421-3901-4132-85c0-7bcdc1236ce9
+                  message:
+                    type: string
+                    example: success
+                  data:
+                    type: object
+                    properties:
+                      name:
+                        type: string
+                        example: suvodeep biswas
+                      email:
+                        type: string
+                        example: suvo@tartan.com
+                      doj:
+                        type: string
+                        format: date
+                        example: 2024-01-10
+                      status:
+                        type: string
+                        example: Active
+                      employmentType:
+                        type: string
+                        example: Permanent
+                      gender:
+                        type: string
+                        example: Male
+                      id:
+                        type: string
+                        example: "90"
+                      employeeId:
+                        type: string
+                        example: "0074"
+                      dob:
+                        type: string
+                        format: date
+                        example: 2001-01-04
+                      pan:
+                        type: string
+                        example: ADJPK2827R
+                      personalEmail:
+                        type: string
+                        nullable: true
+                        example: null
+                      fatherName:
+                        type: string
+                        example: Kirat Singh
+                      bloodGroup:
+                        type: string
+                        example: AB -ve
+                      designation:
+                        type: string
+                        example: NOT AVAILABLE
+                      department:
+                        type: string
+                        example: NOT AVAILABLE
+                      mobileNumber:
+                        type: string
+                        example: "918970393088"
+                      manager:
+                        type: string
+                        example: Manas Mallik
+                      maritalStatus:
+                        type: string
+                        example: Single
+                      nationality:
+                        type: string
+                        example: Indian
+                      aadhar:
+                        type: string
+                        example: ***********37
+                      uan:
+                        type: string
+                        nullable: true
+                        example: null
+                      terminationDate:
+                        type: string
+                        nullable: true
+                        format: date
+                        example: null
+                      grade:
+                        type: string
+                        example: NOT AVAILABLE
+                      groupName:
+                        type: string
+                        example: NOT AVAILABLE
+                      costCenter:
+                        type: string
+                        example: NOT AVAILABLE
+                      managerEmail:
+                        type: string
+                        example: NOT AVAILABLE
+                      managerEmail2:
+                        type: string
+                        example: NOT AVAILABLE
+                      managerEmail3:
+                        type: string
+                        example: NOT AVAILABLE
+                      managerEmail4:
+                        type: string
+                        example: NOT AVAILABLE
+                      managerEmail5:
+                        type: string
+                        example: NOT AVAILABLE
+                      companyName:
+                        type: string
+                        example: NOT AVAILABLE
+                      bankDetails:
+                        type: object
+                        properties:
+                          bankName:
+                            type: string
+                            nullable: true
+                            example: null
+                          accountNumber:
+                            type: string
+                            nullable: true
+                            example: null
+                          ifscCode:
+                            type: string
+                            nullable: true
+                            example: null
+                      currentAddress:
+                        type: object
+                        properties:
+                          addressCountry:
+                            type: string
+                            example: India
+                          addressState:
+                            type: string
+                            example: Haryana
+                          addressPincode:
+                            type: string
+                            example: "121005"
+                          addressLine:
+                            type: string
+                            example: C-69 II Floor P.V.K. Palam Vihar, Gurugram, Haryana 122017, India 
+                          addressCity:
+                            type: string
+                            example: guragaon
+                      permanentAddress:
+                        type: object
+                        properties:
+                          addressCountry:
+                            type: string
+                            nullable: true
+                            example: null
+                          addressState:
+                            type: string
+                            nullable: true
+                            example: null
+                          addressPincode:
+                            type: string
+                            nullable: true
+                            example: null
+                          addressLine:
+                            type: string
+                            example: Bestech Business Tower, I Floor, 122103, Sohna Rd, Sector 48, Gurugram, Haryana 122004, India 
+                          addressCity:
+                            type: string
+                            nullable: true
+                            example: null
+                      dependentDetails:
+                        type: array
+                        items:
+                          type: object
+                      jobLocation:
+                        type: object
+                        properties:
+                          city:
+                            type: string
+                            example: NOT AVAILABLE
+                          pincode:
+                            type: string
+                            example: NOT AVAILABLE
+        '400':
+          description: Not Found – Invalid Organization ID
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  requestId:
+                    type: string
+                    example: 6899af7d-a9cb-48cb-9875-c848932407a1
+                  message:
+                    type: string
+                    example: Invalid Organisation ID
+                  data:
+                    type: string
+                    nullable: true
+                    example: null
         '401':
-          description: Unauthorized - Invalid or missing token.
-        '404':
-          description: Employee not found.
+          description: Unauthorized – Invalid token
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  requestId:
+                    type: string
+                    example: 96783506-9a1c-4af2-a74f-8ac6a41ca82d
+                  message:
+                    type: string
+                    example: Invalid token.
+                  data:
+                    type: string
+                    nullable: true
+                    example: null
+        '424':
+          description: Forbidden – Source Permission denied
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: Source Permission denied
+                  data:
+                    type: object
+                    example: {}
         '500':
-          description: Server error.
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  requestId:
+                    type: string
+                    example: be2915d5-fc30-4d13-bcca-3d62aefac2a0
+                  message:
+                    type: string
+                    example: Internal Server Error
+                  data:
+                    type: string
+                    nullable: true
+                    example: null
+
       security:
         - TokenAuth: []
 
@@ -145,13 +911,7 @@ paths:
           description: The organization identifier.
       responses:
         '200':
-          description: Salary details retrieved successfully.
-        '401':
-          description: Unauthorized - Invalid or missing API key.
-        '404':
-          description: Employee not found.
-        '500':
-          description: Server error.
+
       security:
         - ApiKeyAuth: []
 
@@ -194,13 +954,96 @@ paths:
                       description: Name of the bank.
       responses:
         '200':
-          description: Bank details updated successfully.
+          description: Bank details retrieved successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: success
+                  data:
+                    type: object
+                    properties:
+                      account_number:
+                        type: string
+                        example: 5010023997645
+                      ifsc_code:
+                        type: string
+                        example: HDFC0000001
+                      bank_name:
+                        type: string
+                        example: HDFC Bank
         '400':
-          description: Bad request - invalid or missing parameters.
+          description: Unauthorized – Source authentication failed
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: Source authentication failed
+                  data:
+                    type: string
+                    example: "{{error_message}}"
         '401':
-          description: Unauthorized - Invalid token.
+          description: Unauthorized – Invalid token
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  requestId:
+                    type: string
+                    example: 6944373f-67e5-4c87-bde3-a2b7f66c07af
+                  message:
+                    type: string
+                    example: Invalid token.
+                  data:
+                    type: string
+                    nullable: true
+                    example: null
+        '404':
+          description: Forbidden – Invalid Employee ID
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  requestId:
+                    type: string
+                    example: 159a97ca-f7f9-4656-b38b-56e61d3c1757
+                  message:
+                    type: string
+                    example: Invalid Employee id
+                  data:
+                    type: object
+                    properties:
+                      status:
+                        type: integer
+                        example: 403
+                      message:
+                        type: string
+                        example: Employee code entered doesnot exist
         '500':
-          description: Internal server error.
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  requestId:
+                    type: string
+                    example: be2915d5-fc30-4d13-bcca-3d62aefac2a0
+                  message:
+                    type: string
+                    example: Internal Server Error
+                  data:
+                    type: string
+                    nullable: true
+                    example: null
       security:
         - TokenAuth: []
 
@@ -248,11 +1091,266 @@ paths:
                 - consent_expiry
       responses:
         '200':
-          description: Consent data submitted successfully
-        '400':
-          description: Bad request (validation errors)
+          description: Employee details retrieved successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  requestId:
+                    type: string
+                    example: d4e04a3f-08c2-45bd-a7de-ea37fc632a1f
+                  message:
+                    type: string
+                    example: success
+                  data:
+                    type: object
+                    properties:
+                      name:
+                        type: string
+                        example: Shivam
+                      email:
+                        type: string
+                        example: shivam@tartanhq.com
+                      doj:
+                        type: string
+                        format: date
+                        example: 2024-02-01
+                      status:
+                        type: string
+                        example: Active
+                      employmentType:
+                        type: string
+                        example: Permanent
+                      gender:
+                        type: string
+                        example: Male
+                      id:
+                        type: string
+                        example: "97"
+                      employeeId:
+                        type: string
+                        example: "0078"
+                      dob:
+                        type: string
+                        format: date
+                        example: 1998-02-11
+                      pan:
+                        type: string
+                        example: AHSPS7383G
+                      personalEmail:
+                        type: string
+                        nullable: true
+                        example: null
+                      fatherName:
+                        type: string
+                        example: Amitabh Singh
+                      bloodGroup:
+                        type: string
+                        example: A +ve
+                      designation:
+                        type: string
+                        example: NOT AVAILABLE
+                      department:
+                        type: string
+                        example: NOT AVAILABLE
+                      mobileNumber:
+                        type: string
+                        example: "7893738293"
+                      manager:
+                        type: string
+                        example: NOT AVAILABLE
+                      maritalStatus:
+                        type: string
+                        nullable: true
+                        example: null
+                      nationality:
+                        type: string
+                        example: Indian
+                      aadhar:
+                        type: string
+                        example: ************
+                      uan:
+                        type: string
+                        nullable: true
+                        example: null
+                      terminationDate:
+                        type: string
+                        nullable: true
+                        format: date
+                        example: null
+                      grade:
+                        type: string
+                        example: NOT AVAILABLE
+                      groupName:
+                        type: string
+                        example: NOT AVAILABLE
+                      costCenter:
+                        type: string
+                        example: NOT AVAILABLE
+                      managerEmail:
+                        type: string
+                        example: NOT AVAILABLE
+                      managerEmail2:
+                        type: string
+                        example: NOT AVAILABLE
+                      managerEmail3:
+                        type: string
+                        example: NOT AVAILABLE
+                      managerEmail4:
+                        type: string
+                        example: NOT AVAILABLE
+                      managerEmail5:
+                        type: string
+                        example: NOT AVAILABLE
+                      companyName:
+                        type: string
+                        example: NOT AVAILABLE
+                      bankDetails:
+                        type: object
+                        properties:
+                          accountNumber:
+                            type: string
+                            nullable: true
+                            example: null
+                          ifscCode:
+                            type: string
+                            nullable: true
+                            example: null
+                          bankName:
+                            type: string
+                            nullable: true
+                            example: null
+                      currentAddress:
+                        type: object
+                        properties:
+                          addressCity:
+                            type: string
+                            nullable: true
+                            example: null
+                          addressState:
+                            type: string
+                            example: Haryana
+                          addressCountry:
+                            type: string
+                            example: India
+                          addressLine:
+                            type: string
+                            example: >
+                              733, E53, Vipul World , Sector 48, Sohna Road, Gurgaon, Haryana 122019, India 10A, Bougainvilla Marg, DLF Phase 2, Sector 25, Gurugram, Haryana 122002, India
+                          addressPincode:
+                            type: string
+                            example: "121001"
+                      permanentAddress:
+                        type: object
+                        properties:
+                          addressCity:
+                            type: string
+                            nullable: true
+                            example: null
+                          addressState:
+                            type: string
+                            nullable: true
+                            example: null
+                          addressCountry:
+                            type: string
+                            nullable: true
+                            example: null
+                          addressLine:
+                            type: string
+                            example: >
+                              Suite No 402, The Sapphire Mall, Sector 49, Gurgaon, Gurugram, Haryana 122018, India
+                          addressPincode:
+                            type: string
+                            nullable: true
+                            example: null
+                      dependentDetails:
+                        type: array
+                        items:
+                          type: object
+                      jobLocation:
+                        type: object
+                        properties:
+                          pincode:
+                            type: string
+                            example: NOT AVAILABLE
+                          city:
+                            type: string
+                            example: NOT AVAILABLE
+          '400':
+            description: Bad Request – Validation Error
+            content:
+              application/json:
+                schema:
+                  type: object
+                  properties:
+                    requestId:
+                      type: string
+                      example: 8fae81c0-194c-45a2-a077-e6e4fc3fb6d1
+                    message:
+                      type: string
+                      example: error
+                    data:
+                      type: object
+                      properties:
+                        consent_expiry:
+                          type: array
+                          items:
+                            type: string
+                          example:
+                            - The consent expiry timestamp must be in the future. Please provide a valid timestamp.
+        '404':
+          description: Not Found – Employee not found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  requestId:
+                    type: string
+                    example: 0aaf653a-148e-4cbf-8346-742de60bb2c9
+                  message:
+                    type: string
+                    example: Employee not found
+                  data:
+                    type: string
+                    nullable: true
+                    example: null
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  requestId:
+                    type: string
+                    example: be2915d5-fc30-4d13-bcca-3d62aefac2a0
+                  message:
+                    type: string
+                    example: Internal Server Error
+                  data:
+                    type: string
+                    nullable: true
+                    example: null
         '401':
-          description: Unauthorized (invalid or missing token)
+          description: Unauthorized – Authentication credentials missing
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  requestId:
+                    type: string
+                    example: a337d820-3661-4ddd-a2fe-6da518b87935
+                  message:
+                    type: string
+                    example: Authentication credentials were not provided.
+                  data:
+                    type: string
+                    nullable: true
+                    example: null
+
 
   /api/v2/salary_details/{employee_id}/:
     get:
@@ -294,18 +1392,181 @@ paths:
           example: ctc
       responses:
         '200':
-          description: Salary details retrieved successfully
+          description: Salary data retrieved successfully
           content:
             application/json:
               schema:
                 type: object
-                description: Employee salary details object (structure as per system)
+                properties:
+                  requestId:
+                    type: string
+                    example: bfc0c7fc-a4d4-4881-a1d2-3894e3f53f80
+                  message:
+                    type: string
+                    example: Salary data points successfully fetched
+                  data:
+                    type: object
+                    properties:
+                      ctc:
+                        type: object
+                        properties:
+                          basic:
+                            type: number
+                            example: 3971825
+                          dearnessAllowance:
+                            type: number
+                            nullable: true
+                            example: null
+                          hra:
+                            type: number
+                            example: 1985912
+                          gratuity:
+                            type: number
+                            nullable: true
+                            example: null
+                          medicalAllowance:
+                            type: number
+                            nullable: true
+                            example: null
+                          travelAllowance:
+                            type: number
+                            nullable: true
+                            example: null
+                          specialAllowance:
+                            type: number
+                            example: 1606713
+                          flexiBasketAllowance:
+                            type: number
+                            nullable: true
+                            example: null
+                          grossPay:
+                            type: number
+                            nullable: true
+                            example: null
+                          bonus:
+                            type: object
+                            properties:
+                              joining:
+                                type: number
+                                nullable: true
+                                example: null
+                              referral:
+                                type: number
+                                nullable: true
+                                example: null
+                              retention:
+                                type: number
+                                nullable: true
+                                example: null
+                              performance:
+                                type: number
+                                nullable: true
+                                example: null
+                              relocation:
+                                type: number
+                                nullable: true
+                                example: null
+                              misc:
+                                type: number
+                                nullable: true
+                                example: null
+                          deductions:
+                            type: object
+                            properties:
+                              pf:
+                                type: number
+                                nullable: true
+                                example: null
+                              esi:
+                                type: number
+                                nullable: true
+                                example: null
+                              professionalTax:
+                                type: number
+                                nullable: true
+                                example: null
+                              labourWelfareFund:
+                                type: number
+                                nullable: true
+                                example: null
+                              misc:
+                                type: number
+                                nullable: true
+                                example: null
         '400':
-          description: Bad request (missing or invalid parameters)
-        '401':
-          description: Unauthorized (invalid or missing token)
-        '404':
-          description: Employee not found
+          description: Bad Request – Missing required field
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  requestId:
+                    type: string
+                    example: e86c77c6-36a0-40e7-9df6-efc8c23fae33
+                  message:
+                    type: string
+                    example: error
+                  data:
+                    type: object
+                    properties:
+                      org:
+                        type: array
+                        items:
+                          type: string
+                        example:
+                          - This field is required.
+          '401':
+            description: Unauthorized – Authentication credentials missing
+            content:
+              application/json:
+                schema:
+                  type: object
+                  properties:
+                    requestId:
+                      type: string
+                      example: 1ef741b0-45b9-419e-a7f8-9c4cc77e1f61
+                    message:
+                      type: string
+                      example: Authentication credentials were not provided.
+                    data:
+                      type: string
+                      nullable: true
+                      example: null
+
+            '404':
+              description: Not Found – Salary details not shared
+              content:
+                application/json:
+                  schema:
+                    type: object
+                    properties:
+                      requestId:
+                        type: string
+                        example: bf421cd7-fc71-4ad3-843d-8b3294484260
+                      message:
+                        type: string
+                        example: Salary Details are not shared
+                      data:
+                        type: string
+                        nullable: true
+                        example: null
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  requestId:
+                    type: string
+                    example: 1f4c50f1-5741-4772-83df-8593bdf505bb
+                  message:
+                    type: string
+                    example: Internal Server Error
+                  data:
+                    type: string
+                    nullable: true
+                    example: null
 
   /api/org_details/{org}/:
     get:
@@ -320,13 +1581,118 @@ paths:
           description: Unique identifier of the organization.
       responses:
         '200':
-          description: Organization details retrieved successfully.
-        '401':
-          description: Unauthorized - Invalid or missing token.
+          description: Organization details retrieved successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                    example: 1469
+                  application:
+                    type: object
+                    properties:
+                      app_name:
+                        type: string
+                        example: default_connector_app
+                      app_key:
+                        type: string
+                        example: CELPZEWN
+                      app_secret:
+                        type: string
+                        example: RQUAAMBH
+                  uuid:
+                    type: string
+                    format: uuid
+                    example: 82bbbbdb-b64c-47b9-8cb7-1b377b0dd906
+                  org_name:
+                    type: string
+                    example: Himanshu1999 kjytrtyui
+                  org_cin:
+                    type: string
+                    nullable: true
+                    example: null
+                  website_url:
+                    type: string
+                    example: ""
+                  logo_url:
+                    type: string
+                    format: uri
+                    example: https://tartan-assets.s3.ap-south-1.amazonaws.com/assets/files/tartan-node/Blanklogo.png
+                  email_domain:
+                    type: string
+                    nullable: true
+                    example: null
+                  invite_status:
+                    type: string
+                    example: accepted
+                  created_on:
+                    type: string
+                    format: date-time
+                    example: 2024-08-16T07:17:13.743289Z
+                  modified_on:
+                    type: string
+                    format: date-time
+                    example: 2024-08-16T07:17:40.685525Z
+                  is_client:
+                    type: boolean
+                    example: true
+                  is_vendor:
+                    type: boolean
+                    example: false
+                  brand_name:
+                    type: string
+                    nullable: true
+                    example: null
+                  remote_org_id:
+                    type: string
+                    nullable: true
+                    example: null
+                  hrms:
+                    type: string
+                    nullable: true
+                    example: null
+                  invited_by:
+                    type: integer
+                    example: 751
+                  created_by:
+                    type: integer
+                    example: 978
         '404':
-          description: Organization not found.
+          description: Not Found – Resource does not exist
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  requestId:
+                    type: string
+                    example: 0b47c238-7da1-4091-8a8e-8da1a91eae01
+                  message:
+                    type: string
+                    example: Not found.
+                  data:
+                    type: string
+                    nullable: true
+                    example: null
         '500':
-          description: Server error.
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  requestId:
+                    type: string
+                    example: be2915d5-fc30-4d13-bcca-3d62aefac2a0
+                  message:
+                    type: string
+                    example: Internal Server Error
+                  data:
+                    type: string
+                    nullable: true
+                    example: null
 
   /api/vendor/connections/:
     get:
@@ -342,11 +1708,137 @@ paths:
           description: Filter connections by status (e.g., pending, approved).
       responses:
         '200':
-          description: A list of vendor connections.
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: success
+                  pageInfo:
+                    type: object
+                    properties:
+                      totalPages:
+                        type: integer
+                        example: 6
+                      totalItems:
+                        type: integer
+                        example: 59
+                      items:
+                        type: integer
+                        example: 10
+                      next:
+                        type: boolean
+                        example: true
+                      previous:
+                        type: boolean
+                        example: false
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        org_name:
+                          type: string
+                        org_id:
+                          type: string
+                          format: uuid
+                        shared_data_points:
+                          type: array
+                          items:
+                            type: string
+                        not_shared_data_points:
+                          type: array
+                          items:
+                            type: string
+                        not_requested_data_points:
+                          type: array
+                          items:
+                            type: string
+                        last_successful_sync:
+                          type: string
+                          example: "10th July, 01:11 PM"
+                        sync_frequency:
+                          type: string
+                          nullable: true
+                        hrms_code:
+                          type: string
+                          nullable: true
+                        csm_user:
+                          type: string
+                        application_status_timestamp:
+                          type: string
+                          example: "10th July, 12:55 PM"
+                        created_by_user:
+                          type: string
+                        int_type:
+                          type: string
+                          example: "Upload CSV"
+                        email:
+                          type: string
+                          format: email
+                        phone:
+                          type: string
+                        is_international:
+                          type: boolean
+                        salary_details_flag:
+                          type: boolean
+                        application_connection_status:
+                          type: string
+                          example: "Active"
+          '401':
+            description: Invalid status provided
+            content:
+              application/json:
+                schema:
+                  type: object
+                  properties:
+                    message:
+                      type: string
+                      example: error
+                    data:
+                      type: object
+                      properties:
+                        status:
+                          type: array
+                          items:
+                            type: string
+                          example: ["Invalid status"]
         '401':
-          description: Unauthorized - Invalid or missing token.
+          description: Unauthorized - Invalid token
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  requestId:
+                    type: string
+                    example: 595e4f6f-5c53-4b70-8230-a5572da1ad5d
+                  message:
+                    type: string
+                    example: Invalid token.
+                  data:
+                    type: "null"
+                    nullable: true
         '500':
-          description: Internal server error.
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  requestId:
+                    type: string
+                    example: 10d62daa-16ea-4960-84ba-916c20548352
+                  message:
+                    type: string
+                    example: Internal Server Error
+                  data:
+                    type: "null"
+                    nullable: true
+
       security:
         - TokenAuth: []
 
@@ -381,22 +1873,80 @@ paths:
                   description: A unique identifier for the remote organization.
       responses:
         '200':
-          description: Token generated successfully.
+          description: Successful token generation
           content:
             application/json:
               schema:
                 type: object
                 properties:
-                  token:
+                  org_id:
                     type: string
-                    description: The generated SDK token.
+                    format: uuid
+                    example: a2e93895-c07d-417c-bd29-5b66cd7f4f12
+                  access_token:
+                    type: string
+                    example: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...
+                  exp:
+                    type: integer
+                    example: 3600
+                  corporate_reference_data:
+                    type: object
+                    properties:
+                      unique_id:
+                        type: string
+                        example: abc
         '400':
-          description: Bad request - missing or invalid parameters.
+          description: Invalid email provided
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  code:
+                    type: integer
+                    example: 400
+                  message:
+                    type: string
+                    example: Invalid Email Passed!
+                  data:
+                    type: "null"
+                    nullable: true
         '401':
-          description: Unauthorized - invalid token.
+          description: Authentication credentials missing
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  requestId:
+                    type: string
+                    format: uuid
+                    example: 33df99c9-eb6b-4d69-8d84-e73121278ee5
+                  message:
+                    type: string
+                    example: Authentication credentials were not provided.
+                  data:
+                    type: "null"
+                    nullable: true
         '500':
-          description: Internal server error.
-      security:
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  requestId:
+                    type: string
+                    format: uuid
+                    example: 56c1db80-261f-4dc4-983a-2836a2fca024
+                  message:
+                    type: string
+                    example: Internal Server Error
+                  data:
+                    type: "null"
+                    nullable: true
+
+          security:
         - TokenAuth: []
 
   /api/terminate_connection/:
@@ -417,13 +1967,98 @@ paths:
                   description: The client organization's identifier to disconnect.
       responses:
         '200':
-          description: Connection terminated successfully.
+          description: Connection terminated successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: Connection terminated successfully
+                  data:
+                    type: "null"
+                    nullable: true
         '400':
-          description: Bad request - missing or invalid client_org.
-        '401':
-          description: Unauthorized - Invalid token.
+          description: Connection termination blocked due to sync in progress
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: Connection cannot be terminated while sync is in progress
+                  data:
+                    type: "null"
+                    nullable: true
+
+          '401':
+            description: Unauthorized - Authentication credentials were not provided
+            content:
+              application/json:
+                schema:
+                  type: object
+                  properties:
+                    requestId:
+                      type: string
+                      example: 9a0fe854-d7e9-468c-86a0-e2c34ffcdb6f
+                    message:
+                      type: string
+                      example: Authentication credentials were not provided.
+                    data:
+                      type: "null"
+                      nullable: true
+        '404':
+          description: Not Found - No organisation found with the given client_org
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  code:
+                    type: integer
+                    example: 404
+                  message:
+                    type: string
+                    example: No organisation found with the given client_org
+                  data:
+                    type: "null"
+                    nullable: true
+        '409':
+          description: Conflict - Connection already terminated
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: integer
+                    example: 409
+                  message:
+                    type: string
+                    example: Conflict! Connection already terminated
+                  data:
+                    type: "null"
+                    nullable: true
         '500':
-          description: Internal server error.
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  requestId:
+                    type: string
+                    example: "56c1db80-261f-4dc4-983a-2836a2fca024"
+                  message:
+                    type: string
+                    example: "Internal Server Error"
+                  data:
+                    nullable: true
+                    type: "null"
+
+
       security:
         - TokenAuth: []
 
