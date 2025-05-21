@@ -3,3 +3,83 @@ title : SDK
 mode : wide
 icon: code
 ---
+
+Welcome to the SDK section of our product documentation!
+
+If you're looking for a simple, plug-and-play way to create and onboard corporates directly from your own platform across 80+ HRMS systems, you’re in the right place.
+
+### What is an SDK?
+SDK stands for Software Development Kit. Think of it as a ready-made toolkit that developers can use to add specific features to their app or website—without having to build everything from scratch.
+
+Our SDK lets you embed the complete HRMS Sync journey for corporate onboarding into your own platform. This means your corporate users can seamlessly complete the entire process without ever leaving your dashboard.
+
+### Why use Tartan SDK?
+🚀 Fast to integrate – Just a few lines of code and you're up and running.
+
+🎯 On-brand experience – Keep users on your platform with a seamless, embedded flow.
+
+🔒 Secure & reliable – Built with enterprise-grade security and performance in mind.
+
+
+If you’re a developer or product owner looking to offer a smooth, white-labeled verification experience, this SDK is for you.
+
+Let’s dive into how you can get started. 👇
+
+### How does it work?
+
+- You generate a token using the [generate token](/api-reference/sdk/get-sdk-token) API.
+- Utilize the access token to launch the SDK via the Initiate Function.
+- Monitor SDK Events to track and evaluate the user journey on Tartan Sync SDK.
+
+
+
+### Embedding Tartan SDK
+
+To add the SDK on the frontend, add the following script tag in your index.html file, preferably inside the head tag:
+
+```js
+<script src="https://hrms-sdk.tartanhq.com/v1/sync-sdk.js"></script>
+```
+
+### Initiating Tartan SDK
+
+The script tag exposes a window object called hrmsSyncSdk in the website. hrmsSyncSdk consists of 2 functions : startJourney() & closeJourney().
+
+```js
+<div id="open-modal-btn">
+2 Open Modal
+3 </div>
+4 <script>
+5 function onClick()  {
+6   const options = {
+7   mode: 'test', // for production environment, keep the mode as 'prod' or blank
+8   onEvent: function (eventName, eventData) {
+9      // TODO: business logic goes here
+10    }
+11  };
+12  hrmsSyncSdk.startJourney("<access_token>", options); // <access_token> is the token generated using generate token API.
+13 }
+14 const button = document.getElementById('open-modal-btn');
+15 button.addEventListener('click', onClick);
+16 </script>
+```
+
+### SDK Events
+SDK events are notifications or signals sent by the SDK to let your system know when something important has happened—like when a user starts or completes a task.  
+
+Think of them as real-time updates from the SDK that you can use to track user actions or trigger next steps in your app.   
+
+The Tartan Sync SDK emits events to track a user’s progress throughout the journey. You can capture these events using the **onEvent** option, which is passed as the second argument (options) in the **startJourney()** function.
+
+The **onEvent** option takes a function with two parameters: **eventName** and **eventData**. These provide detailed information about each event, allowing you to implement custom business logic based on the event type and its associated data.
+
+
+| **Event Name**                | **Event Data**            | **Description**                                                                         |
+| ----------------------------- | ------------------------ | --------------------------------------------------------------------------------------- |
+| `dataTransferMode.select`     |   `{ flowType : "HRMS"  }`              | Triggered when the user selects the desired mode for data transfer.                     |
+| `hrms.select`                 | `{ hrmsName: "ZingHR" }`    | Occurs when the user chooses an HRMS from the available options.                        |
+| `hrmsConnectionParams.submit` | `{ hrmsName: "ZingHR" }`   | Activated when the user submits connection parameters for the selected HRMS.            |
+| `dataSelection.submit`        | `{ hrmsName: "ZingHR" }`    | Initiated when the user submits the selection of data to be shared with the vendor.     |
+| `authType.select`             | `{ authType: "Basic" }`     | Occurs when the user selects the authentication type required for Push API integration. |
+| `pushApiDocs.get`             | `{ authType: "Basic" }`    | Activated when the user clicks the “Get Documentation” CTA for Push API integration.    |
+| `sdkWindow.close`             | `–`                         | Triggered when the user clicks the Close button on the SDK window.                      |

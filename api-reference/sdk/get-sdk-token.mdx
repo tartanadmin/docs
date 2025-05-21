@@ -3,3 +3,47 @@ title: Get SDK Token
 openapi: "POST /api/sdk/token/"
 sidebarTitle: Get SDK Token
 ---
+<Note> The token generated is valid for 1 hour. </Note>
+
+
+| Parameter	| Description |
+ | --- | --- | 
+| api_key |	Authentication key issued by Tartan. **Note: This key is secret and should be kept safe.** |
+| email |	The email of your corporate whose data you wish to retrieve. |
+| org_name |	The corporate's organisation name. |
+| fullname |	The name of the HR admin at the corporate organisation. |
+| remote_org_id (optional) | A unique identifier that allows you to bypass validation checks for corporates with multiple domains. It ensures a consistent org_id is provided for the same organization, regardless of domain variations. This is a client-defined identifier that Tartan uses to link users to a corporate. Refer to [API workflow](/docs/hrmssync/sdk) section of this page for a detailed explanation of this API workflow. |
+
+
+###  Generate SDK Token API: Decision Matrix
+
+**Input Validation**:
+The API begins by validating the provided inputs ( email , org_name, fullname, and optionally remote_org_id). If any required input is missing or invalid, the API returns an error.
+
+**Check for remote_org_id**:
+If a remote_org_id is provided, the API directly maps this identifier to an existing org_id without further domain or name validation and creates a user under it using the provided email if needed. This path is designed for clients with multiple domains or custom configurations who want a consistent identifier.
+
+**Domain-Based org_id Determination**:
+
+If remote_org_id is not provided, the API does the following:
+
+**Domain Classification**: The API checks if the email domain belongs to a common domain (Refer to list attached below) or a private domain (custom domains used by corporates).  
+
+**Private Domain Handling**: If the email belongs to a private domain, the API ensures that there is a one-to-one mapping between the private domain and an org_id.  
+
+If an org_id already exists for that private domain, it is returned. Otherwise, a new org_id is created for that domain.  
+
+**Common/Public Domain Handling**: If the email belongs to a common domain, the API cannot rely on the domain alone to determine the organization.  
+
+In this case, the API checks if the provided org_name is unique  
+
+
+**Unique org_name**: If the organization name is unique, a new org_id is generated.  
+
+**Existing org_name**: If the organization name already exists, the corresponding org_id is returned.  
+
+This step prevents the creation of duplicate organizations when using common/public domains.
+
+Flowchart representing the onboarding process -
+
+<Frame> <img src="/images/sdk_onboarding.png"/> </Frame>
