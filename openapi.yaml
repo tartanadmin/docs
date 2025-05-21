@@ -711,7 +711,7 @@ paths:
                         example: Indian
                       aadhar:
                         type: string
-                        example: ***********37
+                        example: 37
                       uan:
                         type: string
                         nullable: true
@@ -1154,7 +1154,7 @@ paths:
                         example: NOT AVAILABLE
                       mobileNumber:
                         type: string
-                        example: "7893738293"
+                        example: "7893738293"S
                       manager:
                         type: string
                         example: NOT AVAILABLE
@@ -1167,7 +1167,7 @@ paths:
                         example: Indian
                       aadhar:
                         type: string
-                        example: ************
+                        example: ASDFG
                       uan:
                         type: string
                         nullable: true
@@ -1798,7 +1798,7 @@ paths:
                     type: string
                     example: Invalid token.
                   data:
-                    type: "null"
+                    type: string
                     nullable: true
         '500':
           description: Internal Server Error
@@ -1814,7 +1814,7 @@ paths:
                     type: string
                     example: Internal Server Error
                   data:
-                    type: "null"
+                    type: string
                     nullable: true
       security:
         - TokenAuth: []
@@ -1886,7 +1886,7 @@ paths:
                     type: string
                     example: Invalid Email Passed!
                   data:
-                    type: "null"
+                    type: string
                     nullable: true
         '401':
           description: Authentication credentials missing
@@ -1903,7 +1903,7 @@ paths:
                     type: string
                     example: Authentication credentials were not provided.
                   data:
-                    type: "null"
+                    type: string
                     nullable: true
         '500':
           description: Internal server error
@@ -1920,7 +1920,7 @@ paths:
                     type: string
                     example: Internal Server Error
                   data:
-                    type: "null"
+                    type: string
                     nullable: true
       security:
         - TokenAuth: []
@@ -1953,7 +1953,7 @@ paths:
                     type: string
                     example: Connection terminated successfully
                   data:
-                    type: "null"
+                    type: string
                     nullable: true
         '400':
           description: Connection termination blocked due to sync in progress
@@ -1966,7 +1966,7 @@ paths:
                     type: string
                     example: Connection cannot be terminated while sync is in progress
                   data:
-                    type: "null"
+                    type: string
                     nullable: true
         '401':
           description: Unauthorized - Authentication credentials were not provided
@@ -1982,7 +1982,7 @@ paths:
                     type: string
                     example: Authentication credentials were not provided.
                   data:
-                    type: "null"
+                    type: string
                     nullable: true
         '404':
           description: Not Found - No organisation found with the given client_org
@@ -1998,7 +1998,7 @@ paths:
                     type: string
                     example: No organisation found with the given client_org
                   data:
-                    type: "null"
+                    type: string
                     nullable: true
         '409':
           description: Conflict - Connection already terminated
@@ -2014,7 +2014,7 @@ paths:
                     type: string
                     example: Conflict! Connection already terminated
                   data:
-                    type: "null"
+                    type: string
                     nullable: true
         '500':
           description: Internal Server Error
@@ -2031,7 +2031,7 @@ paths:
                     example: "Internal Server Error"
                   data:
                     nullable: true
-                    type: "null"
+                    type: string
       security:
         - TokenAuth: []
 
