@@ -1154,7 +1154,7 @@ paths:
                         example: NOT AVAILABLE
                       mobileNumber:
                         type: string
-                        example: "7893738293"S
+                        example: "7893738293"
                       manager:
                         type: string
                         example: NOT AVAILABLE

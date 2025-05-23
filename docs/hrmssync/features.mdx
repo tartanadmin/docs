@@ -2,3 +2,43 @@
 title: 'Features'
 icon : list
 ---
+
+This page highlights the key features of Tartan's HRMS SYNC, designed to help you understand its capabilities and how it can support your requirements. Whether you're building SDK integrations or using Tartan console, these features provide a clear view of the main offerings of the product.  
+
+
+### Custom Data Models
+
+This feature enables you to tailor data requests for each corporate while sending an invite. You can select specific data points relevant to that corporate, ensuring you only request what’s necessary. On the Data Models page, you can mark certain fields as mandatory—these must be shared by the corporate. For all other optional data points, the corporate has the flexibility to choose whether or not to share them. This approach streamlines data collection, respects corporate preferences, and enhances collaboration efficiency.
+### Sync Frequency
+
+Clients can tailor data synchronisation based on their preferences. HyperSync offers configurable options ranging from scheduled syncs like once, twice, or thrice a week to real-time updates as soon as changes occur in the source HRMS. This flexibility ensures applications like "Banking OS" or "Wealth OS" [Conversation History] receive data with the required freshness for timely processing and decisions.  
+
+### Partial Data Sync  
+
+This feature ensures privacy by design by allowing granular control over shared data. HR administrators can effortlessly toggle specific objects and fields to synchronise only necessary information. Furthermore, access can be limited to specific employee subsets based on criteria, such as department for particular use cases. This aligns with data minimisation principles for compliance.  
+
+### On-Demand Access 
+
+This feature facilitates controlled sharing of employee data between vendors and clients. Initially, only limited, mandatory data points are shared for all employees, potentially via webhooks. Complete, detailed data is only accessible for employees who have explicitly provided their consent, typically via a dedicated API. The system involves the vendor inviting the client's HR, who then manages the connection and is informed about these tiered data sharing rules.
+
+### User Management  
+
+While not a data feature, the sources indicate administrative capabilities for managing the integration. HR admins or IT admins are responsible for initiating the connection and authorising Tartan to access their HRMS This implies a platform interface for these users to manage integration settings, configure data sharing permissions, and potentially manage team access, facilitating collaborative platform management.  
+
+### Post-Processing Data 
+
+Post-Processing Data HyperSync performs post-processing on the data fetched from various HRMS platforms. This involves transformations necessary to normalise the information into Tartan's unified data model. Vendor-configurable rules are applied during this stage for data accuracy, including replacements, character removal, or merging fields. The goal is to provide consistently formatted, ready-to-use data to the client application, minimising manual effort.  
+
+### Webhook Reconciliation 
+
+The feature aims to implement a more robust system for handling webhook delivery failures. This new solution introduces an automated End-of-Day (EOD) reconciliation process that retries failed webhooks daily for a configurable duration. Additionally, a Manual API allows clients to request missed webhook events based on criteria like status, timestamp, or request ID, ensuring they can recover data and maintain consistency even if initial deliveries fail or they experience downtime. The goal is a more reliable and resilient webhook delivery system.
+
+### State Management  
+
+It is introduced to address a key problem: HR admins losing their progress when they drop off from multi-step SDK journeys. This can happen due to navigating away, closing the SDK or browser, or network issues, forcing them to restart the entire process. The core objective is to implement state persistence, so users can resume exactly where they left off. This involves saving the user's current step or state, primarily using client-side storage and ensuring it persists across sessions and browser closures. 
+
+### Request new HRMS
+
+This was introduced to allow users to request integrations with specific HRMS providers that are not currently supported. This helps the company better understand which HRMS platforms matter most and prioritise integration development based on real client demand. The process involves the user clicking a link ("Can’t find your HRMS? Tell us!") which opens a form requiring the HRMS Name (mandatory), and optionally a website URL, API documentation upload, with some additional information to submit the query.
+
+
