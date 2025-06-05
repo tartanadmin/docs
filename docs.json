@@ -93,6 +93,7 @@
                   {
                     "group": "Webhooks",
                     "pages": [
+                      "api-reference/webhooks/webhook-push",
                       "api-reference/webhooks/webhook-events",
                       "api-reference/webhooks/webhook-events-V2",
                       "api-reference/webhooks/webhook-recon"
