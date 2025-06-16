@@ -1,0 +1,22 @@
+This event is triggered once the connection is accepted and data syncing begins (initial sync). It provides the total number of new employee records and updates to existing records (if any).  
+ If a scheduled sync finds no new or updated records from the source, the event will be triggered with "newRecords": 0 and "updatedRecords": 0  
+
+```json
+{
+  "requestId": "6754fec7-d3db-458a-942b-85bfc5822c82",
+  "orgId": "f47ac10b-58cc-4372-a567-0e02b2c3d479",
+  "event": "sync.events.initiated",
+  "eventType": "sync.events",
+  "recordCount": null,
+  "body": [
+    {
+      "newRecords": 6,
+      "updatedRecords": 0
+    }
+  ],
+  "timeStamp": "2025-05-25 03:18:30",
+  "statusCode": "200",
+  "message": "success",
+  "vendor.orgId": "3fa85f64-5717-4562-b3fc-2c963f66afa6"
+}
+```

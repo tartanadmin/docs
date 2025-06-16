@@ -1,0 +1,117 @@
+This event is triggered when the initial batch of employee data is received from the source. Each webhook contains a maximum of 10 employee records. For example, if there are 105 employees in the source, 11 webhooks will be triggered — 10 with 10 records each, and the 11th with the remaining 5 records.
+
+```json
+{
+    "requestId": "b7cc9282-3587-4403-8589-fd0e9f87cf97",
+    "orgId": "f47ac10b-58cc-4372-a567-0e02b2c3d479",
+    "vendor.orgId": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+    "event": "sync.events.employee.add",
+    "eventType": "sync.events.initial",
+    "recordCount": 10,
+    "body": ["Array of Objects with each object containing an employee record"],
+    "timeStamp": "",
+    "statusCode":"200",
+    "message":"success"
+}
+```
+**Sample employee record**  
+
+Below is a sample employee object included in the array provided in the above webhook.
+
+```json
+{
+  "name": "Manish Gupta",
+  "email": "manish@tartanhq.com",
+  "doj": "2021-06-01",
+  "status": "Active",
+  "employmentType": "Permanent",
+  "gender": "Male",
+  "id": "7",
+  "employeeId": "5",
+  "dob": "1983-06-08",
+  "pan": "************",
+  "personalEmail": "manish.gupta@gmail.com",
+  "fatherName": "Ritesh Gupta",
+  "bloodGroup": "AB +ve",
+  "designation": "NOT AVAILABLE",
+  "department": "Engineering",
+  "mobileNumber": "************",
+  "manager": "Meet Semlani",
+  "maritalStatus": "Married",
+  "nationality": "Indian",
+  "aadhar": "************",
+  "uan": "************",
+  "terminationDate": "",
+  "grade": "D-3",
+  "groupName": "NOT AVAILABLE",
+  "costCenter": "NOT AVAILABLE",
+  "managerEmail": "shreesh@tartanhq.com",
+  "managerEmail2": "NOT AVAILABLE",
+  "managerEmail3": "NOT AVAILABLE",
+  "managerEmail4": "NOT AVAILABLE",
+  "managerEmail5": "NOT AVAILABLE",
+  "companyName": "TartanHQ",
+  "bankDetails": {
+    "accountNumber": "************",
+    "ifscCode": "************",
+    "bankName": "SBI"
+  },
+  "currentAddress": {
+    "addressPincode": "560080",
+    "addressCity": "Banglore",
+    "addressCountry": "India",
+    "addressState": "Karnataka",
+    "addressLine": "Sadashiva Nagar Armane Nagar"
+  },
+  "permanentAddress": {
+    "addressPincode": "226001",
+    "addressCity": "Luknow",
+    "addressCountry": "India",
+    "addressState": "Uttar Pradesh",
+    "addressLine": "Yarana Nagar Luknow"
+  },
+  "jobLocation": {
+    "pincode": "NOT AVAILABLE",
+    "city": "Gurugram"
+  },
+  "dependentDetails": [
+    {
+      "dob": "NOT AVAILABLE",
+      "email": "sohan.negi01@gmail.com",
+      "gender": "Male",
+      "mobileNumber": "NOT AVAILABLE",
+      "name": "Sohan Negi",
+      "profession": "NOT AVAILABLE",
+      "relation": "Father"
+    }
+  ],
+  "salaryDetails": {
+    "ctc": {
+      "basic": 50000,
+      "dearnessAllowance": 9000.9,
+      "hra": 25000.5,
+      "gratuity": 2000.7,
+      "medicalAllowance": 2000.7,
+      "travelAllowance": 2000.7,
+      "specialAllowance": null,
+      "flexiBasketAllowance": null,
+      "grossPay": null,
+      "bonus": {
+        "joining": 80000,
+        "referral": null,
+        "retention": null,
+        "performance": null,
+        "relocation": null,
+        "misc": null
+      },
+      "deductions": {
+        "pf": 1800,
+        "esi": null,
+        "professionalTax": null,
+        "labourWelfareFund": null,
+        "misc": null
+      }
+    }
+  }
+}
+```

@@ -1,0 +1,16 @@
+This event is triggered during a scheduled sync when new employee records are retrieved from the source. It contains only those records that were added after the initial sync.
+
+```json
+{
+    "requestId": "f2ebc662-b849-4987-a6c7-8941b9d02964",
+    "orgId": "f47ac10b-58cc-4372-a567-0e02b2c3d479",
+    "vendor.orgId": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+    "event": "sync.events.employee.add",
+    "eventType": "sync.events.delta",
+    "recordCount": 10,
+    "body": ["Array of Objects with each object containing an employee record"],
+    "timeStamp": "2025-05-26 03:18:30",
+    "statusCode":"200",
+    "message":"Success"
+}
+```

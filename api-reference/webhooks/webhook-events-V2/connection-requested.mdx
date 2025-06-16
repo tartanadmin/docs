@@ -1,0 +1,30 @@
+This event is triggered when a corporate is invited to establish a connection either through the console or by calling the [Generate SDK token](/api-reference/sdk/get-sdk-token) API.
+
+``` json
+{
+  "syncSessionId": "bhkjqhg6662bkkjbwwfwj",
+  "webhookCounter": 1,
+  "requestId": "4cfe72cd-a6f1-464b-ab4e-5a752484435e",
+  "orgId": "f47ac10b-58cc-4372-a567-0e02b2c3d479",
+  "event": "connection.events.requested",
+  "eventType": "connection.events",
+  "recordCount": 1,
+  "body": [
+    {
+      "orgId": "f47ac10b-58cc-4372-a567-0e02b2c3d479",
+      "orgName": "Intellect Design Pvt Ltd",
+      "orgCin": null,
+      "hrms": null,
+      "status": "CONNECTION_INVITED",
+      "invitedBy": "ankur@tartanhq.com",
+      "acceptedBy": null,
+      "terminatedBy": null,
+      "remote_org_id": "afesgvbfojsdfdogfauwr"
+    }
+  ],
+  "timeStamp": "2025-05-15 03:11:10",
+  "statusCode": "200",
+  "message": "success",
+  "vendor.orgId": "3fa85f64-5717-4562-b3fc-2c963f66afa6"
+}
+```
