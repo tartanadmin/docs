@@ -11,7 +11,7 @@
   "navigation": {
     "tabs": [
       {
-        "tab": "Documentation",
+        "tab": "Overview",
         "groups": [
           {
             "group": "HyperSync",
@@ -53,7 +53,7 @@
         ]
       },
       {
-        "tab": "Unified APIs",
+        "tab": "API Collection",
         "groups": [
           {
             "group": "HRMS",
