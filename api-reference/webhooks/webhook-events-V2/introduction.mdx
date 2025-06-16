@@ -1,0 +1,81 @@
+Tartan lets you stay up to date with data changes by using Webhooks. You can easily manage and test webhook events directly through the [Tartan Console](/docs/hrmssync/console), ensuring your integration runs smoothly.
+
+Tartan uses a webhook system to automatically notify your application whenever there’s a change in the source system. Instead of constantly polling the API for updates, you simply set up a secure HTTPS endpoint to receive scheduled webhook from tartan.
+
+
+### Webhook Headers
+
+Webhook headers are bits of information sent along with a webhook request, just like a label on a parcel. They help the receiving server understand who sent the request, what kind of data is inside, and sometimes how to verify it's legit.
+
+
+
+| Header  | Description | 
+    | --- | --- | 
+    | ``` "content-type":"application/json" ``` | Tells about the format of the data (json, etc.) |
+    | ``` "tartan-signature": "xxxxxxxxx" ```  | Security signature to verify authenticity | 
+   
+
+
+**tartan-signature** - To ensure that your API endpoint is verifying that incoming POST requests are from Tartan and not a malicious source, and that payloads haven't been altered in transit.
+
+
+
+The signature is generated using a combination of the secret_key/app_key and the payload data. You can refer to the code snippet below to generate and verify the encoded hash using the [hmac module](https://docs.python.org/3/library/hmac.html) and the sha256 algorithm.
+
+``` python
+import hmac
+import hashlib
+import json
+# Example secret key and message
+app_key = "my_secret_key"
+payload = request.body
+try:
+  tartan_signature = request.headers.get("tartan-signature")
+except KeyError:
+    print('No signature sent, request did not originate from Tartan.')
+    raise
+print("Recieved tartan-signature:", tartan_signature)
+# Generate HMAC digest using SHA256
+hmac_digest = hmac.new(app_key.encode("utf-8"), payload.encode("utf-8"), hashlib.sha256).hexdigest()
+print("Generated HMAC Digest:", hmac_digest)
+# Check if the generated HMAC matches the received one
+if hmac_digest == tartan_signature:
+    print("HMAC verified successfully!")
+else:
+    print("HMAC verification failed!")
+    ```
+
+<font color='#883AEE'>`POST` </font> 
+
+### Webhook events
+
+Once you've set up your webhook URL via our [console](docs/hrmssync/console") or with help from your Tartan SPOC, you'll start receiving webhook events from Tartan.
+
+You can choose which events you'd like to receive from the [Webhook Events](docs/hrmssync/console") section. Once configured, Tartan will begin sending only those selected events to your endpoint.
+
+<Note> Tartan automatically re-triggers all failed webhooks at the end of the day (EOD). </Note>
+
+
+| Webhook Key        | Description                                                                 |
+| :----------------- | :-------------------------------------------------------------------------- |
+| `syncSessionId`    | Represents the unique sessionID for the sync session associated with this webhook. |
+| `webhookCounter`   | Security signature to verify authenticity                                   |
+| `requestId`        | Security signature to verify authenticity                                   |
+| `orgId`            | Represents the orgID of the corporate associated with this webhook.         |
+| `event`            | Event name                                                                  |
+| `eventType`        | Event type                                                                  |
+| `recordCount`      | Denotes the total number of employee records in this webhook.               |
+| `orgName`          | Name of the org associated with this webhook.                               |
+| `hrms`             | The source HRMS                                                             |
+| `status`           | Event status                                                                |
+| `invitedBy`        | Email of the user who sent the invite.                                      |
+| `acceptedBy`       | Email of the user who accepted the invite.                                  |
+| `terminatedBy`     | Email of the user who terminated the connection.                            |
+| `remote_org_id`    | An optional unique identifier                                               |
+| `timeStamp`        | Timestamp of the webhook in UTC                                             |
+| `vendor.orgId`     | Your organisation ID                                                        |
+| `body`             | Contains employee record data received from the source.                     |
+| `statusCode`       | HTTP status code of the webhook call                                        |
+| `newRecords`       | Represents the expected total number of new records in this session.        |
+| `updatedRecords`   | Represents the expected total number of updates in the existing records in this session. |
+

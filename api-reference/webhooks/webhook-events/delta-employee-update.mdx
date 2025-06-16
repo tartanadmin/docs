@@ -1,0 +1,16 @@
+This event is triggered during a scheduled sync when updates for existing employee records are retrieved from the source. It contains only those records that were added after the initial sync. The response contains the complete employee records with updated values for the changed fields.
+
+```json
+{
+    "requestId": "b7cc9282-3587-4403-8589-fd0e9f87cf97",
+    "orgId": "f47ac10b-58cc-4372-a567-0e02b2c3d479",
+    "event": "sync.events.employee.update",
+    "eventType": "sync.events.delta",
+    "recordCount": 1,
+    "body": ["Array of Objects with each object containing an employee record"],
+    "timeStamp": "2025-05-26 03:19:30",
+    "statusCode": "200",
+    "message": "success",
+    "vendor.orgId": "3fa85f64-5717-4562-b3fc-2c963f66afa6"
+}
+```

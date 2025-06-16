@@ -56,9 +56,9 @@
         "tab": "API Collection",
         "groups": [
           {
-            "group": "HRMS",
+            "group": "HRMS Sync",
             "pages": [
-              "docs/api-docs/introduction",
+            
               
               {
                 "group": "Reference",
@@ -93,10 +93,42 @@
                   {
                     "group": "Webhooks",
                     "pages": [
+                    
                       "api-reference/webhooks/webhook-push",
-                      "api-reference/webhooks/webhook-events",
-                      "api-reference/webhooks/webhook-events-V2",
-                      "api-reference/webhooks/webhook-recon"
+                      {
+                        "group": "Webhook events",
+                        "pages": [
+                          "api-reference/webhooks/webhook-events/introduction",
+                          "api-reference/webhooks/webhook-events/test-webhook",
+                          "api-reference/webhooks/webhook-events/connection-requested",
+                          "api-reference/webhooks/webhook-events/connection-accepted",
+                          "api-reference/webhooks/webhook-events/connection-failed",
+                          "api-reference/webhooks/webhook-events/connection-terminated",
+                          "api-reference/webhooks/webhook-events/sync-initiated",
+                          "api-reference/webhooks/webhook-events/employee-add",
+                          "api-reference/webhooks/webhook-events/delta-employee-add",
+                          "api-reference/webhooks/webhook-events/delta-employee-update",
+                          "api-reference/webhooks/webhook-events/sync-completed"
+                        ]
+                      },
+                      {
+                        "group": "Webhook events V2",
+                        "pages": [
+                          "api-reference/webhooks/webhook-events-V2/introduction",
+                          "api-reference/webhooks/webhook-events-V2/test-webhook",
+                          "api-reference/webhooks/webhook-events-V2/connection-requested",
+                          "api-reference/webhooks/webhook-events-V2/connection-accepted",
+                          "api-reference/webhooks/webhook-events-V2/connection-failed",
+                          "api-reference/webhooks/webhook-events-V2/connection-terminated",
+                          "api-reference/webhooks/webhook-events-V2/sync-initiated",
+                          "api-reference/webhooks/webhook-events-V2/employee-add",
+                          "api-reference/webhooks/webhook-events-V2/delta-employee-add",
+                          "api-reference/webhooks/webhook-events-V2/delta-employee-update",
+                          "api-reference/webhooks/webhook-events-V2/sync-completed"
+                        ]
+                      },
+                     
+                      "api-reference/webhooks/webhook-reconciliation"
                     ]
                   }
                 ]
@@ -109,21 +141,7 @@
           }
         ]
       }
-    ],
-    "global": {
-      "anchors": [
-        {
-          "anchor": "About Us",
-          "href": "https://www.tartanhq.com/about",
-          "icon": "users"
-        },
-        {
-          "anchor": "Webinar",
-          "href": "https://www.tartanhq.com/webinars-hrms",
-          "icon": "video"
-        }
-      ]
-    }
+    ]
   },
   "styling": {
     "codeblocks": "dark"

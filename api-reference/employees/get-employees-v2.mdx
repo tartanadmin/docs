@@ -3,3 +3,23 @@ title: Get Employee Directory V2
 openapi: "GET /api/v2/employee_list"
 sidebarTitle: Get Employee Directory V2
 ---
+
+
+**Enum Mapping**
+
+<Note> 
+ - If an unexpected value is received for any enum-based key, and it doesn’t match any value in the enum mapping, the value will be set to null.
+</Note> 
+
+
+|     Field name            |       Tartan Enum value / Format        |
+|:-------------------------:|:---------------------------------------:|
+| `dob`                     | `%Y-%m-%d`                              |
+| `doj`                     | `%Y-%m-%d`                              |
+| `terminationDate`         | `%Y-%m-%d`                              |
+| `dependentDetails.dob`    | `%Y-%m-%d`                              |
+| `status`                  | `["Active", "Not Active"]`              |
+| `employmentType`          | `["Permanent", "Contract", "Probation/Intern"]` |
+| `gender`                  | `["Male", "Female", "Other"]`           |
+| `maritalStatus`           | `["Single", "Married", "Divorced", "Widowed"]`   |
+| `dependentDetails.gender` | `["Male", "Female", "Other"]`           |
