@@ -67,10 +67,8 @@
                   {
                     "group": "Employees",
                     "pages": [
-                      "api-reference/employees/get-employees",
                       "api-reference/employees/get-employees-v2",
                       "api-reference/employees/employee-details-api",
-                      "api-reference/employees/get-salary-details",
                       "api-reference/employees/update-employee-bank-details",
                       "api-reference/employees/consent-data",
                       "api-reference/employees/get-salary-details_v2"
@@ -95,22 +93,6 @@
                     "pages": [
                     
                       "api-reference/webhooks/webhook-push",
-                      {
-                        "group": "Webhook events",
-                        "pages": [
-                          "api-reference/webhooks/webhook-events/introduction",
-                          "api-reference/webhooks/webhook-events/test-webhook",
-                          "api-reference/webhooks/webhook-events/connection-requested",
-                          "api-reference/webhooks/webhook-events/connection-accepted",
-                          "api-reference/webhooks/webhook-events/connection-failed",
-                          "api-reference/webhooks/webhook-events/connection-terminated",
-                          "api-reference/webhooks/webhook-events/sync-initiated",
-                          "api-reference/webhooks/webhook-events/employee-add",
-                          "api-reference/webhooks/webhook-events/delta-employee-add",
-                          "api-reference/webhooks/webhook-events/delta-employee-update",
-                          "api-reference/webhooks/webhook-events/sync-completed"
-                        ]
-                      },
                       {
                         "group": "Webhook events V2",
                         "pages": [
