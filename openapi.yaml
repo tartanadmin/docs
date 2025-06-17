@@ -3,20 +3,22 @@ info:
   title: Employee List API
   description: Retrieve a paginated list of employees from the organization.
   version: 1.0.0
+
 servers:
   - url: https://{env}.tartanhq.com
     description: Dynamic environment-based server
     variables:
       env:
         default: dev
+
 paths:
   /api/external/sync/callback:
     post:
       summary: Sync Callback
       description: |
         Sync employee data to the external system.
-        - Use **Bearer Token (Authorization header)** for JSON submission.
-        - Use **username/password headers** for `multipart/form-data` submission.
+        - Use Bearer Token (Authorization header) for JSON submission.
+        - Use username/password headers for multipart/form-data submission.
       requestBody:
         required: true
         content:
@@ -28,7 +30,7 @@ paths:
               $ref: '#/components/schemas/EmployeeFormData'
       security:
         - bearerAuth: []
-        - basicHeaderAuth: []  # custom header-based auth
+        - basicHeaderAuth: []
       responses:
         '200':
           description: Sync successful
@@ -88,6 +90,38 @@ paths:
           description: Invalid credentials or malformed request
         '401':
           description: Unauthorized
+
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+
+    basicHeaderAuth:
+      type: apiKey
+      in: header
+      name: username
+
+  schemas:
+    EmployeeData:
+      type: object
+      properties:
+        name:
+          type: string
+        email:
+          type: string
+          format: email
+        # Add other fields here as needed
+
+    EmployeeFormData:
+      type: object
+      properties:
+        name:
+          type: string
+        email:
+          type: string
+        # Add other form-data fields here as needed
 
   /api/employee_list:
     get:
