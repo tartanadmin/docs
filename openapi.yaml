@@ -91,38 +91,6 @@ paths:
         '401':
           description: Unauthorized
 
-components:
-  securitySchemes:
-    bearerAuth:
-      type: http
-      scheme: bearer
-      bearerFormat: JWT
-
-    basicHeaderAuth:
-      type: apiKey
-      in: header
-      name: username
-
-  schemas:
-    EmployeeData:
-      type: object
-      properties:
-        name:
-          type: string
-        email:
-          type: string
-          format: email
-        # Add other fields here as needed
-
-    EmployeeFormData:
-      type: object
-      properties:
-        name:
-          type: string
-        email:
-          type: string
-        # Add other form-data fields here as needed
-
   /api/employee_list:
     get:
       summary: Get Employee List
