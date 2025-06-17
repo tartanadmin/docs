@@ -37,11 +37,10 @@ paths:
         '401':
           description: Unauthorized
 
-
   /api/external/oauth/token:
     post:
       summary: Get OAuth Token
-      description: Issues an OAuth token using the Resource Owner Password Credentials grant type.
+      description: Obtain an access token using Resource Owner Password Credentials (password grant type).
       operationId: getOAuthToken
       requestBody:
         required: true
@@ -49,21 +48,25 @@ paths:
           multipart/form-data:
             schema:
               type: object
+              required:
+                - username
+                - password
+                - grant_type
               properties:
                 username:
                   type: string
-                  example: user@example.com
+                  example: johndoe@example.com
                 password:
                   type: string
                   format: password
-                  example: yourpassword
+                  example: mysecretpassword
                 grant_type:
                   type: string
                   enum: [password]
                   example: password
       responses:
         '200':
-          description: Token response
+          description: OAuth token generated successfully
           content:
             application/json:
               schema:
@@ -71,14 +74,20 @@ paths:
                 properties:
                   access_token:
                     type: string
+                    example: eyJhbGciOi...
                   token_type:
                     type: string
+                    example: bearer
                   expires_in:
                     type: integer
+                    example: 3600
                   refresh_token:
                     type: string
+                    example: eyJhbGciOi...
         '400':
-          description: Invalid credentials or
+          description: Invalid credentials or malformed request
+        '401':
+          description: Unauthorized
 
   /api/employee_list:
     get:
