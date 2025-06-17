@@ -10,6 +10,34 @@ servers:
       env:
         default: dev
 paths:
+  /api/external/sync/callback:
+    post:
+      summary: Sync Callback
+      description: |
+        Sync employee data to the external system.
+        - Use **Bearer Token (Authorization header)** for JSON submission.
+        - Use **username/password headers** for `multipart/form-data` submission.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EmployeeData'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/EmployeeFormData'
+      security:
+        - bearerAuth: []
+        - basicHeaderAuth: []  # custom header-based auth
+      responses:
+        '200':
+          description: Sync successful
+        '400':
+          description: Invalid input
+        '401':
+          description: Unauthorized
+
+
   /api/external/oauth/token:
     post:
       summary: Get OAuth Token
@@ -2186,4 +2214,29 @@ components:
       type: apiKey
       in: header
       name: Authorization
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+    basicHeaderAuth:  # Custom header-based auth
+      type: apiKey
+      in: header
+      name: username  # Only one can be defined; doc note required
+  schemas:
+    EmployeeData:
+      type: object
+      properties:
+        name:
+          type: string
+        email:
+          type: string
+        # ... all other JSON fields as defined earlier
 
+    EmployeeFormData:
+      type: object
+      properties:
+        name:
+          type: string
+        email:
+          type: string
+        # ... form-data flat structure fields
