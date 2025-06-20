@@ -7,6 +7,10 @@
     "light": "#2f5fec",
     "dark": "#193057"
   },
+  "appearance": {
+    "defaultMode": "dark",
+    "modeToggle": true
+  },
   "favicon": "/favicon.png",
   "navigation": {
     "tabs": [
@@ -148,9 +152,7 @@
     "dark": "/logo/light.png",
     "href": "https://www.tartanhq.com/"
   },
-  "appearance": {
-    "default": "light"
-  },
+  
   "background": {
     "decoration": "grid"
   },
