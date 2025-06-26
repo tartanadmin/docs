@@ -275,6 +275,13 @@ paths:
                             addressState:
                               type: string
                               nullable: true
+                        employeeMetadata:
+                          type: object
+                          properties:
+                            marriageDate:
+                              type: string
+                              nullable: true
+                              format: date
                         dependentDetails:
                           type: array
                           items:
