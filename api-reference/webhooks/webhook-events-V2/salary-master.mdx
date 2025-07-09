@@ -1,0 +1,79 @@
+This event is triggered when salary master data (CTC and monthly salary components) is received from the HRMS system. This webhook contains the salary structure information including basic pay, allowances, and deductions.
+
+```json
+{
+  "syncSessionId": "4c43e741-d8fd-4395-a2ce-50202cc9441e",
+  "webhookCounter": 1,
+  "requestId": "95622620-14b0-42c9-a0a7-989fb7426168",
+  "orgId": "f88de4ec-811a-4bfc-bfb2-88bd611c75f8",
+  "corporate_reference_data": null,
+  "event": "connection.events.salary_master",
+  "eventType": "connection.events",
+  "recordCount": 1,
+  "body": [
+    {
+      "ctc": {
+        "data": [
+          {
+            "id": "472f391f-39a6-4257-8f86-18b102dc22bc",
+            "identifier": "basic",
+            "title": "Basic_p",
+            "accountingCode": null
+          },
+          {
+            "id": "392003bb-28f2-477f-bb39-f3c443c3cdbe",
+            "identifier": "hra",
+            "title": "HRA",
+            "accountingCode": null
+          },
+          {
+            "id": "690a37a1-2faa-49b9-a0d7-4e319fae9975",
+            "identifier": "medical",
+            "title": "Medical Allowance",
+            "accountingCode": null
+          },
+          {
+            "id": "48c8c5d7-0b30-4e99-90cd-bc7132c7cde3",
+            "identifier": "pf",
+            "title": "PF Employee",
+            "accountingCode": null
+          }
+        ]
+      },
+      "monthly": {
+        "data": [
+          {
+            "id": "472f391f-39a6-4257-8f86-18b102dc22bc",
+            "identifier": "basic",
+            "title": "Basic_p",
+            "accountingCode": null
+          },
+          {
+            "id": "392003bb-28f2-477f-bb39-f3c443c3cdbe",
+            "identifier": "hra",
+            "title": "HRA",
+            "accountingCode": null
+          },
+          {
+            "id": "690a37a1-2faa-49b9-a0d7-4e319fae9975",
+            "identifier": "medical",
+            "title": "Medical Allowance",
+            "accountingCode": null
+          },
+          {
+            "id": "48c8c5d7-0b30-4e99-90cd-bc7132c7cde3",
+            "identifier": "pf",
+            "title": "PF Employee",
+            "accountingCode": null
+          }
+        ]
+      }
+    }
+  ],
+  "timeStamp": "2025-06-05 05:22:28",
+  "statusCode": "200",
+  "message": "success",
+  "hrms_name": "Keka",
+  "vendor.orgId": "71e8897a-fa6c-4100-8749-86d917e4857e"
+}
+``` 
