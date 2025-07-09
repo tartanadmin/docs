@@ -112,7 +112,8 @@
                           "api-reference/webhooks/webhook-events-V2/employee-add",
                           "api-reference/webhooks/webhook-events-V2/delta-employee-add",
                           "api-reference/webhooks/webhook-events-V2/delta-employee-update",
-                          "api-reference/webhooks/webhook-events-V2/sync-completed"
+                          "api-reference/webhooks/webhook-events-V2/sync-completed",
+                          "api-reference/webhooks/webhook-events-V2/salary-master"
                         ]
                       },
                       {
