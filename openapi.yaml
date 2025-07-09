@@ -383,46 +383,6 @@ paths:
                     example: null
       security:
         - TokenAuth: []
-
-paths:
-  /api/webhooks/resend:
-    post:
-      summary: Resend Failed Webhook
-      description: Triggers a resend of failed webhooks using specific parameters.
-      operationId: resendWebhook
-      security:
-        - appTokenAuth: []
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                status:
-                  type: string
-                  enum: [fail]
-                  example: fail
-                request_timestamp:
-                  type: string
-                  format: date-time
-                  example: "2024-01-23 12:03:14"
-                request_id:
-                  type: string
-                  nullable: true
-                  example: null
-                webhook_id:
-                  type: string
-                  nullable: true
-                  example: null
-      responses:
-        '200':
-          description: Webhook resend triggered successfully
-        '400':
-          description: Invalid request payload
-        '401':
-          description: Unauthorized – Invalid or missing token
-
   /api/v2/employee_list:
     get:
       summary: Get Employee List (v2)
