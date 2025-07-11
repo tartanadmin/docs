@@ -4,18 +4,47 @@ openapi: "POST /api/sdk/token/"
 sidebarTitle: Get SDK Token
 ---
 <Note> The token generated is valid for 1 hour. </Note>
-<Note> Reach out to your SPOC in Tartan for api_key. </Note>
+<Note> To get the api_key and url please contact hemanth@tartanhq.com </Note>
+<Note> Note that the apiKey is secret and should be kept safe. </Note>
 
 | Parameter	| Description |
  | --- | --- | 
 | api_key |	Authentication key issued by Tartan. **Note: This key is secret and should be kept safe.** |
-| email |	The email of your corporate whose data you wish to retrieve. |
-| org_name |	The corporate's organisation name. |
-| fullname |	The name of the HR admin at the corporate organisation. |
-| remote_org_id (optional) | A unique identifier that allows you to bypass validation checks for corporates with multiple domains. It ensures a consistent org_id is provided for the same organization, regardless of domain variations. This is a client-defined identifier that Tartan uses to link users to a corporate. Refer to [API workflow](/docs/hrmssync/sdk) section of this page for a detailed explanation of this API workflow. |
-| corporate_reference_data (optional) | Additional reference data for the corporate organization. Can include custom fields like `unique_id` or other metadata. |
-| data_model_flags (optional) | Configuration flags to control which data fields are enabled/disabled in the SDK. Contains nested objects for different field categories. |
+| email |	Your client's email, whose data you wish to retrieve. |
+| org_name |	Your client's organisation name, that you wish to invite. |
+| fullname |	The name of the HR admin (of client organisation). |
+| remote_org_id (optional) | The unique organisation id of client organisation. |
+| corporate_reference_data (optional) | The unique reference data for client/corporate. |
+| data_model_flags (optional) | Object to define field flags for data selection. For the global data_model_flags reference, see the [Global Data Model API](/api-reference/sdk/get-data-model-flags). |
 
+<Note> Both "remote_org_id" and "corporate_reference_data" cannot be used together. </Note>
+
+## API Usage
+
+This is the API curl (POST api) that needs to be hit from your backend.
+
+**Note**: The apiKey is secret and should be kept safe.
+
+### Example Request
+
+```bash
+curl --location -g '{{url}}/api/sdk/token/' \
+--header 'Content-Type: application/json' \
+--header 'Authorization: Token {{API-KEY}}' \
+--data-raw '{
+    "email": "client@example.com",
+    "org_name": "Client Organization",
+    "fullname": "HR Admin Name",
+    "remote_org_id": "unique-org-id",
+    "corporate_reference_data": {"unique_id": "abc"},
+    "data_model_flags": {
+        "detail_info_fields": {
+            "gender": -1,
+            "dob": -1
+        }
+    }
+}'
+```
 
 ###  Generate SDK Token API: Decision Matrix
 
@@ -88,6 +117,6 @@ The `data_model_flags` parameter allows you to control which data fields are ena
 - `ctc_deductions_esi`: -1 (disabled) or 1 (enabled)
 
 #### Flag Values
-- `-1`: Field is enabled and required
-- `0`: Field is optional (can be filled but not mandatory)
-- `1`: Field is enabled and optional
+- `-1`: Mandatory Data Field
+- `1`: Non-Mandatory Enabled Data Field
+- `0`: Non-Mandatory Disabled Data Field

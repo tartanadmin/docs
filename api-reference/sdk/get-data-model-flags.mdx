@@ -8,7 +8,15 @@ sidebarTitle: Get Data Model Flags
 
 ## Overview
 
-The Get Data Model Flags API allows you to retrieve the current configuration of data model flags that control which fields are enabled, disabled, or optional in the SDK.
+This GET API fetches the global data selection model used to configure data_model_flags. It returns available fields and flags that can be used to customize data retrieval for client organizations.
+
+### Flag Values
+
+| Value | Description |
+| --- | --- |
+| `-1` | Mandatory Data Field |
+| `1` | Non-Mandatory Enabled Data Field |
+| `0` | Non-Mandatory Disabled Data Field |
 
 ## Request
 
@@ -159,13 +167,7 @@ Cost to Company (CTC) related fields including salary components, deductions, an
 ### salary_monthly_details_fields
 Monthly salary breakdown including allowances, deductions, and reimbursements.
 
-## Flag Values
 
-| Value | Description |
-| --- | --- |
-| `-1` | Field is enabled and required |
-| `0` | Field is optional (can be filled but not mandatory) |
-| `1` | Field is enabled and optional |
 
 ## Error Responses
 

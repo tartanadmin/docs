@@ -1944,29 +1944,29 @@ paths:
                         gender:
                           type: integer
                           enum: [-1, 0, 1]
-                          description: Gender field flag (-1=required, 0=optional, 1=enabled optional)
+                          description: Gender field flag (-1=mandatory, 0=disabled, 1=enabled)
                         dob:
                           type: integer
                           enum: [-1, 0, 1]
-                          description: Date of birth field flag (-1=required, 0=optional, 1=enabled optional)
+                          description: Date of birth field flag (-1=mandatory, 0=disabled, 1=enabled)
                     dependent_details_fields:
                       type: object
                       properties:
                         dependentDetails_mobileNumber:
                           type: integer
                           enum: [-1, 0, 1]
-                          description: Dependent mobile number field flag (-1=required, 0=optional, 1=enabled optional)
+                          description: Dependent mobile number field flag (-1=mandatory, 0=disabled, 1=enabled)
                     ctc_details_fields:
                       type: object
                       properties:
                         ctc_deductions_misc:
                           type: integer
                           enum: [-1, 0, 1]
-                          description: CTC miscellaneous deductions field flag (-1=required, 0=optional, 1=enabled optional)
+                          description: CTC miscellaneous deductions field flag (-1=mandatory, 0=disabled, 1=enabled)
                         ctc_deductions_esi:
                           type: integer
                           enum: [-1, 0, 1]
-                          description: CTC ESI deductions field flag (-1=required, 0=optional, 1=enabled optional)
+                          description: CTC ESI deductions field flag (-1=mandatory, 0=disabled, 1=enabled)
       responses:
         '200':
           description: Successful token generation
