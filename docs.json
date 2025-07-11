@@ -79,6 +79,7 @@
                     "group": "SDK",
                     "pages": [
                       "api-reference/sdk/get-sdk-token",
+                      "api-reference/sdk/get-data-model-flags",
                       "api-reference/sdk/terminate-connection"
                     ]
                   },

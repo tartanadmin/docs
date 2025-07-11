@@ -1943,30 +1943,30 @@ paths:
                       properties:
                         gender:
                           type: integer
-                          enum: [-1, 1]
-                          description: Enable/disable gender field (-1=disabled, 1=enabled)
+                          enum: [-1, 0, 1]
+                          description: Gender field flag (-1=required, 0=optional, 1=enabled optional)
                         dob:
                           type: integer
-                          enum: [-1, 1]
-                          description: Enable/disable date of birth field (-1=disabled, 1=enabled)
+                          enum: [-1, 0, 1]
+                          description: Date of birth field flag (-1=required, 0=optional, 1=enabled optional)
                     dependent_details_fields:
                       type: object
                       properties:
                         dependentDetails_mobileNumber:
                           type: integer
-                          enum: [-1, 1]
-                          description: Enable/disable dependent mobile number field (-1=disabled, 1=enabled)
+                          enum: [-1, 0, 1]
+                          description: Dependent mobile number field flag (-1=required, 0=optional, 1=enabled optional)
                     ctc_details_fields:
                       type: object
                       properties:
                         ctc_deductions_misc:
                           type: integer
-                          enum: [-1, 1]
-                          description: Enable/disable CTC miscellaneous deductions field (-1=disabled, 1=enabled)
+                          enum: [-1, 0, 1]
+                          description: CTC miscellaneous deductions field flag (-1=required, 0=optional, 1=enabled optional)
                         ctc_deductions_esi:
                           type: integer
-                          enum: [-1, 1]
-                          description: Enable/disable CTC ESI deductions field (-1=disabled, 1=enabled)
+                          enum: [-1, 0, 1]
+                          description: CTC ESI deductions field flag (-1=required, 0=optional, 1=enabled optional)
       responses:
         '200':
           description: Successful token generation
@@ -2043,6 +2043,447 @@ paths:
                     nullable: true
       security:
         - TokenAuth: []
+
+  /api/sdk/data_model_flags/:
+    get:
+      summary: Get Data Model Flags
+      description: Retrieve the current configuration of data model flags that control which fields are enabled, disabled, or optional in the SDK.
+      security:
+        - TokenAuth: []
+      responses:
+        '200':
+          description: Data model flags retrieved successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: "success"
+                  message:
+                    type: string
+                    example: "Data model flags retrieved successfully"
+                  data:
+                    type: object
+                    properties:
+                      detail_info_fields:
+                        type: object
+                        properties:
+                          name:
+                            type: integer
+                            enum: [-1, 0, 1]
+                            example: -1
+                          employeeId:
+                            type: integer
+                            enum: [-1, 0, 1]
+                            example: -1
+                          status:
+                            type: integer
+                            enum: [-1, 0, 1]
+                            example: -1
+                          email:
+                            type: integer
+                            enum: [-1, 0, 1]
+                            example: 1
+                          doj:
+                            type: integer
+                            enum: [-1, 0, 1]
+                            example: 1
+                          employmentType:
+                            type: integer
+                            enum: [-1, 0, 1]
+                            example: 1
+                          gender:
+                            type: integer
+                            enum: [-1, 0, 1]
+                            example: -1
+                          dob:
+                            type: integer
+                            enum: [-1, 0, 1]
+                            example: -1
+                          pan:
+                            type: integer
+                            enum: [-1, 0, 1]
+                            example: 1
+                          personalEmail:
+                            type: integer
+                            enum: [-1, 0, 1]
+                            example: 1
+                          fatherName:
+                            type: integer
+                            enum: [-1, 0, 1]
+                            example: 1
+                          bloodGroup:
+                            type: integer
+                            enum: [-1, 0, 1]
+                            example: 1
+                          designation:
+                            type: integer
+                            enum: [-1, 0, 1]
+                            example: 1
+                          department:
+                            type: integer
+                            enum: [-1, 0, 1]
+                            example: 1
+                          mobileNumber:
+                            type: integer
+                            enum: [-1, 0, 1]
+                            example: 1
+                          manager:
+                            type: integer
+                            enum: [-1, 0, 1]
+                            example: 1
+                          maritalStatus:
+                            type: integer
+                            enum: [-1, 0, 1]
+                            example: 1
+                          nationality:
+                            type: integer
+                            enum: [-1, 0, 1]
+                            example: 1
+                          aadhar:
+                            type: integer
+                            enum: [-1, 0, 1]
+                            example: 1
+                          uan:
+                            type: integer
+                            enum: [-1, 0, 1]
+                            example: 1
+                          terminationDate:
+                            type: integer
+                            enum: [-1, 0, 1]
+                            example: 1
+                          grade:
+                            type: integer
+                            enum: [-1, 0, 1]
+                            example: 1
+                          groupName:
+                            type: integer
+                            enum: [-1, 0, 1]
+                            example: 1
+                          costCenter:
+                            type: integer
+                            enum: [-1, 0, 1]
+                            example: 1
+                          managerEmail:
+                            type: integer
+                            enum: [-1, 0, 1]
+                            example: 1
+                          managerEmail2:
+                            type: integer
+                            enum: [-1, 0, 1]
+                            example: 1
+                          managerEmail3:
+                            type: integer
+                            enum: [-1, 0, 1]
+                            example: 1
+                          managerEmail4:
+                            type: integer
+                            enum: [-1, 0, 1]
+                            example: 1
+                          managerEmail5:
+                            type: integer
+                            enum: [-1, 0, 1]
+                            example: 1
+                          companyName:
+                            type: integer
+                            enum: [-1, 0, 1]
+                            example: 1
+                          currentAddress:
+                            type: integer
+                            enum: [-1, 0, 1]
+                            example: 1
+                          permanentAddress:
+                            type: integer
+                            enum: [-1, 0, 1]
+                            example: 1
+                          jobLocation:
+                            type: integer
+                            enum: [-1, 0, 1]
+                            example: 1
+                          employeeMetadata_marriageDate:
+                            type: integer
+                            enum: [-1, 0, 1]
+                            example: 0
+                      bank_details_fields:
+                        type: object
+                        properties:
+                          bankDetails_bankName:
+                            type: integer
+                            enum: [-1, 0, 1]
+                            example: 1
+                          bankDetails_ifscCode:
+                            type: integer
+                            enum: [-1, 0, 1]
+                            example: 1
+                          bankDetails_accountNumber:
+                            type: integer
+                            enum: [-1, 0, 1]
+                            example: 1
+                      dependent_details_fields:
+                        type: object
+                        properties:
+                          dependentDetails_name:
+                            type: integer
+                            enum: [-1, 0, 1]
+                            example: 1
+                          dependentDetails_relation:
+                            type: integer
+                            enum: [-1, 0, 1]
+                            example: 1
+                          dependentDetails_dob:
+                            type: integer
+                            enum: [-1, 0, 1]
+                            example: 0
+                          dependentDetails_mobileNumber:
+                            type: integer
+                            enum: [-1, 0, 1]
+                            example: 1
+                          dependentDetails_email:
+                            type: integer
+                            enum: [-1, 0, 1]
+                            example: 0
+                          dependentDetails_gender:
+                            type: integer
+                            enum: [-1, 0, 1]
+                            example: 1
+                          dependentDetails_profession:
+                            type: integer
+                            enum: [-1, 0, 1]
+                            example: 1
+                      ctc_details_fields:
+                        type: object
+                        properties:
+                          ctc_basic:
+                            type: integer
+                            enum: [-1, 0, 1]
+                            example: -1
+                          ctc_hra:
+                            type: integer
+                            enum: [-1, 0, 1]
+                            example: -1
+                          ctc_specialAllowance:
+                            type: integer
+                            enum: [-1, 0, 1]
+                            example: -1
+                          ctc_medicalAllowance:
+                            type: integer
+                            enum: [-1, 0, 1]
+                            example: -1
+                          ctc_dearnessAllowance:
+                            type: integer
+                            enum: [-1, 0, 1]
+                            example: -1
+                          ctc_flexiBasketAllowance:
+                            type: integer
+                            enum: [-1, 0, 1]
+                            example: -1
+                          ctc_travelAllowance:
+                            type: integer
+                            enum: [-1, 0, 1]
+                            example: -1
+                          ctc_gratuity:
+                            type: integer
+                            enum: [-1, 0, 1]
+                            example: -1
+                          ctc_grossPay:
+                            type: integer
+                            enum: [-1, 0, 1]
+                            example: -1
+                          ctc_deductions_pf:
+                            type: integer
+                            enum: [-1, 0, 1]
+                            example: 1
+                          ctc_deductions_esi:
+                            type: integer
+                            enum: [-1, 0, 1]
+                            example: 1
+                          ctc_deductions_misc:
+                            type: integer
+                            enum: [-1, 0, 1]
+                            example: 1
+                          ctc_deductions_labourWelfareFund:
+                            type: integer
+                            enum: [-1, 0, 1]
+                            example: 1
+                          ctc_deductions_professionalTax:
+                            type: integer
+                            enum: [-1, 0, 1]
+                            example: 1
+                          ctc_bonus_joining:
+                            type: integer
+                            enum: [-1, 0, 1]
+                            example: 1
+                          ctc_bonus_misc:
+                            type: integer
+                            enum: [-1, 0, 1]
+                            example: 1
+                          ctc_bonus_performance:
+                            type: integer
+                            enum: [-1, 0, 1]
+                            example: 1
+                          ctc_bonus_referral:
+                            type: integer
+                            enum: [-1, 0, 1]
+                            example: 1
+                          ctc_bonus_relocation:
+                            type: integer
+                            enum: [-1, 0, 1]
+                            example: 1
+                          ctc_bonus_retention:
+                            type: integer
+                            enum: [-1, 0, 1]
+                            example: 0
+                          ctc_raw:
+                            type: integer
+                            enum: [-1, 0, 1]
+                            example: 0
+                      salary_monthly_details_fields:
+                        type: object
+                        properties:
+                          monthly_basic:
+                            type: integer
+                            enum: [-1, 0, 1]
+                            example: 0
+                          monthly_dearnessAllowance:
+                            type: integer
+                            enum: [-1, 0, 1]
+                            example: 0
+                          monthly_hra:
+                            type: integer
+                            enum: [-1, 0, 1]
+                            example: 0
+                          monthly_medicalAllowance:
+                            type: integer
+                            enum: [-1, 0, 1]
+                            example: 0
+                          monthly_travelAllowance:
+                            type: integer
+                            enum: [-1, 0, 1]
+                            example: 0
+                          monthly_specialAllowance:
+                            type: integer
+                            enum: [-1, 0, 1]
+                            example: 0
+                          monthly_flexiBasketAllowance:
+                            type: integer
+                            enum: [-1, 0, 1]
+                            example: 0
+                          monthly_gratuity:
+                            type: integer
+                            enum: [-1, 0, 1]
+                            example: 0
+                          monthly_otherAllowance:
+                            type: integer
+                            enum: [-1, 0, 1]
+                            example: 0
+                          monthly_deductions_pf:
+                            type: integer
+                            enum: [-1, 0, 1]
+                            example: 0
+                          monthly_deductions_esi:
+                            type: integer
+                            enum: [-1, 0, 1]
+                            example: 0
+                          monthly_deductions_professionalTax:
+                            type: integer
+                            enum: [-1, 0, 1]
+                            example: 0
+                          monthly_deductions_labourWelfareFund:
+                            type: integer
+                            enum: [-1, 0, 1]
+                            example: 0
+                          monthly_deductions_tds:
+                            type: integer
+                            enum: [-1, 0, 1]
+                            example: 0
+                          monthly_deductions_medicalClaimDeduction:
+                            type: integer
+                            enum: [-1, 0, 1]
+                            example: 0
+                          monthly_deductions_groupTermInsuranceDeductions:
+                            type: integer
+                            enum: [-1, 0, 1]
+                            example: 0
+                          monthly_deductions_earlyWageDeduction:
+                            type: integer
+                            enum: [-1, 0, 1]
+                            example: 0
+                          monthly_deductions_misc:
+                            type: integer
+                            enum: [-1, 0, 1]
+                            example: 0
+                          monthly_bonus_joining:
+                            type: integer
+                            enum: [-1, 0, 1]
+                            example: 0
+                          monthly_bonus_referral:
+                            type: integer
+                            enum: [-1, 0, 1]
+                            example: 0
+                          monthly_bonus_retention:
+                            type: integer
+                            enum: [-1, 0, 1]
+                            example: 0
+                          monthly_bonus_performance:
+                            type: integer
+                            enum: [-1, 0, 1]
+                            example: 0
+                          monthly_bonus_relocation:
+                            type: integer
+                            enum: [-1, 0, 1]
+                            example: 0
+                          monthly_bonus_misc:
+                            type: integer
+                            enum: [-1, 0, 1]
+                            example: 0
+                          monthly_grossPay:
+                            type: integer
+                            enum: [-1, 0, 1]
+                            example: 0
+                          monthly_reimbursements:
+                            type: integer
+                            enum: [-1, 0, 1]
+                            example: 0
+                          monthly_raw:
+                            type: integer
+                            enum: [-1, 0, 1]
+                            example: 0
+        '401':
+          description: Unauthorized - Authentication credentials were not provided
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: "error"
+                  message:
+                    type: string
+                    example: "Authentication credentials were not provided."
+                  data:
+                    type: string
+                    nullable: true
+                    example: null
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: "error"
+                  message:
+                    type: string
+                    example: "Internal Server Error"
+                  data:
+                    type: string
+                    nullable: true
+                    example: null
 
   /api/terminate_connection/:
     post:

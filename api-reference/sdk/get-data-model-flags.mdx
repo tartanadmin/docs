@@ -1,0 +1,188 @@
+---
+title: Get Data Model Flags
+openapi: "GET /api/sdk/data_model_flags/"
+sidebarTitle: Get Data Model Flags
+---
+
+<Note> This endpoint retrieves the current data model flags configuration for the SDK. </Note>
+
+## Overview
+
+The Get Data Model Flags API allows you to retrieve the current configuration of data model flags that control which fields are enabled, disabled, or optional in the SDK.
+
+## Request
+
+### Headers
+
+| Header | Description |
+| --- | --- |
+| `Authorization` | Token authentication (required) |
+| `Content-Type` | application/json |
+
+### Example Request
+
+```bash
+curl --location -g '{{url}}/api/sdk/data_model_flags/' \
+--header 'Authorization: Token {{API-KEY}}' \
+--header 'Content-Type: application/json'
+```
+
+## Response
+
+### Success Response (200)
+
+```json
+{
+  "status": "success",
+  "message": "Data model flags retrieved successfully",
+  "data": {
+    "detail_info_fields": {
+      "name": -1,
+      "employeeId": -1,
+      "status": -1,
+      "email": 1,
+      "doj": 1,
+      "employmentType": 1,
+      "gender": -1,
+      "dob": -1,
+      "pan": 1,
+      "personalEmail": 1,
+      "fatherName": 1,
+      "bloodGroup": 1,
+      "designation": 1,
+      "department": 1,
+      "mobileNumber": 1,
+      "manager": 1,
+      "maritalStatus": 1,
+      "nationality": 1,
+      "aadhar": 1,
+      "uan": 1,
+      "terminationDate": 1,
+      "grade": 1,
+      "groupName": 1,
+      "costCenter": 1,
+      "managerEmail": 1,
+      "managerEmail2": 1,
+      "managerEmail3": 1,
+      "managerEmail4": 1,
+      "managerEmail5": 1,
+      "companyName": 1,
+      "currentAddress": 1,
+      "permanentAddress": 1,
+      "jobLocation": 1,
+      "employeeMetadata_marriageDate": 0
+    },
+    "bank_details_fields": {
+      "bankDetails_bankName": 1,
+      "bankDetails_ifscCode": 1,
+      "bankDetails_accountNumber": 1
+    },
+    "dependent_details_fields": {
+      "dependentDetails_name": 1,
+      "dependentDetails_relation": 1,
+      "dependentDetails_dob": 0,
+      "dependentDetails_mobileNumber": 1,
+      "dependentDetails_email": 0,
+      "dependentDetails_gender": 1,
+      "dependentDetails_profession": 1
+    },
+    "ctc_details_fields": {
+      "ctc_basic": -1,
+      "ctc_hra": -1,
+      "ctc_specialAllowance": -1,
+      "ctc_medicalAllowance": -1,
+      "ctc_dearnessAllowance": -1,
+      "ctc_flexiBasketAllowance": -1,
+      "ctc_travelAllowance": -1,
+      "ctc_gratuity": -1,
+      "ctc_grossPay": -1,
+      "ctc_deductions_pf": 1,
+      "ctc_deductions_esi": 1,
+      "ctc_deductions_misc": 1,
+      "ctc_deductions_labourWelfareFund": 1,
+      "ctc_deductions_professionalTax": 1,
+      "ctc_bonus_joining": 1,
+      "ctc_bonus_misc": 1,
+      "ctc_bonus_performance": 1,
+      "ctc_bonus_referral": 1,
+      "ctc_bonus_relocation": 1,
+      "ctc_bonus_retention": 0,
+      "ctc_raw": 0
+    },
+    "salary_monthly_details_fields": {
+      "monthly_basic": 0,
+      "monthly_dearnessAllowance": 0,
+      "monthly_hra": 0,
+      "monthly_medicalAllowance": 0,
+      "monthly_travelAllowance": 0,
+      "monthly_specialAllowance": 0,
+      "monthly_flexiBasketAllowance": 0,
+      "monthly_gratuity": 0,
+      "monthly_otherAllowance": 0,
+      "monthly_deductions_pf": 0,
+      "monthly_deductions_esi": 0,
+      "monthly_deductions_professionalTax": 0,
+      "monthly_deductions_labourWelfareFund": 0,
+      "monthly_deductions_tds": 0,
+      "monthly_deductions_medicalClaimDeduction": 0,
+      "monthly_deductions_groupTermInsuranceDeductions": 0,
+      "monthly_deductions_earlyWageDeduction": 0,
+      "monthly_deductions_misc": 0,
+      "monthly_bonus_joining": 0,
+      "monthly_bonus_referral": 0,
+      "monthly_bonus_retention": 0,
+      "monthly_bonus_performance": 0,
+      "monthly_bonus_relocation": 0,
+      "monthly_bonus_misc": 0,
+      "monthly_grossPay": 0,
+      "monthly_reimbursements": 0,
+      "monthly_raw": 0
+    }
+  }
+}
+```
+
+## Field Categories
+
+### detail_info_fields
+Basic employee information fields including personal details, employment information, and contact details.
+
+### bank_details_fields
+Bank account information fields for salary disbursement.
+
+### dependent_details_fields
+Information about employee dependents including family members and their details.
+
+### ctc_details_fields
+Cost to Company (CTC) related fields including salary components, deductions, and bonuses.
+
+### salary_monthly_details_fields
+Monthly salary breakdown including allowances, deductions, and reimbursements.
+
+## Flag Values
+
+| Value | Description |
+| --- | --- |
+| `-1` | Field is enabled and required |
+| `0` | Field is optional (can be filled but not mandatory) |
+| `1` | Field is enabled and optional |
+
+## Error Responses
+
+### 401 Unauthorized
+```json
+{
+  "status": "error",
+  "message": "Authentication credentials were not provided.",
+  "data": null
+}
+```
+
+### 500 Internal Server Error
+```json
+{
+  "status": "error",
+  "message": "Internal Server Error",
+  "data": null
+}
+``` 
