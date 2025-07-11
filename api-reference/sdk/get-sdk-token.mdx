@@ -88,5 +88,6 @@ The `data_model_flags` parameter allows you to control which data fields are ena
 - `ctc_deductions_esi`: -1 (disabled) or 1 (enabled)
 
 #### Flag Values
-- `1`: Field is enabled and required
-- `-1`: Field is disabled and hidden from the SDK
+- `-1`: Field is enabled and required
+- `0`: Field is optional (can be filled but not mandatory)
+- `1`: Field is enabled and optional
