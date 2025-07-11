@@ -13,6 +13,8 @@ sidebarTitle: Get SDK Token
 | org_name |	The corporate's organisation name. |
 | fullname |	The name of the HR admin at the corporate organisation. |
 | remote_org_id (optional) | A unique identifier that allows you to bypass validation checks for corporates with multiple domains. It ensures a consistent org_id is provided for the same organization, regardless of domain variations. This is a client-defined identifier that Tartan uses to link users to a corporate. Refer to [API workflow](/docs/hrmssync/sdk) section of this page for a detailed explanation of this API workflow. |
+| corporate_reference_data (optional) | Additional reference data for the corporate organization. Can include custom fields like `unique_id` or other metadata. |
+| data_model_flags (optional) | Configuration flags to control which data fields are enabled/disabled in the SDK. Contains nested objects for different field categories. |
 
 
 ###  Generate SDK Token API: Decision Matrix
@@ -47,3 +49,44 @@ This step prevents the creation of duplicate organizations when using common/pub
 Flowchart representing the onboarding process -
 
 <Frame> <img src="/images/sdk_onboarding.png"/> </Frame>
+
+### Data Model Flags
+
+The `data_model_flags` parameter allows you to control which data fields are enabled or disabled in the SDK. This gives you granular control over the data collection process.
+
+#### Structure
+
+```json
+{
+  "data_model_flags": {
+    "detail_info_fields": {
+      "gender": -1,
+      "dob": -1
+    },
+    "dependent_details_fields": {
+      "dependentDetails_mobileNumber": 1
+    },
+    "ctc_details_fields": {
+      "ctc_deductions_misc": 1,
+      "ctc_deductions_esi": 1
+    }
+  }
+}
+```
+
+#### Field Categories
+
+**detail_info_fields**: Controls basic employee information fields
+- `gender`: -1 (disabled) or 1 (enabled)
+- `dob`: -1 (disabled) or 1 (enabled)
+
+**dependent_details_fields**: Controls dependent information fields
+- `dependentDetails_mobileNumber`: -1 (disabled) or 1 (enabled)
+
+**ctc_details_fields**: Controls CTC (Cost to Company) related fields
+- `ctc_deductions_misc`: -1 (disabled) or 1 (enabled)
+- `ctc_deductions_esi`: -1 (disabled) or 1 (enabled)
+
+#### Flag Values
+- `1`: Field is enabled and required
+- `-1`: Field is disabled and hidden from the SDK

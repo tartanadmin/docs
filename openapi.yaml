@@ -1920,7 +1920,6 @@ paths:
                 - email
                 - org_name
                 - fullname
-                - remote_org_id
               properties:
                 email:
                   type: string
@@ -1935,6 +1934,46 @@ paths:
                 remote_org_id:
                   type: string
                   description: A unique identifier for the remote organization.
+                corporate_reference_data:
+                  type: object
+                  description: Additional reference data for the corporate organization.
+                  properties:
+                    unique_id:
+                      type: string
+                      description: Custom unique identifier for the corporate.
+                data_model_flags:
+                  type: object
+                  description: Configuration flags to control which data fields are enabled/disabled in the SDK.
+                  properties:
+                    detail_info_fields:
+                      type: object
+                      properties:
+                        gender:
+                          type: integer
+                          enum: [-1, 1]
+                          description: Enable/disable gender field (-1=disabled, 1=enabled)
+                        dob:
+                          type: integer
+                          enum: [-1, 1]
+                          description: Enable/disable date of birth field (-1=disabled, 1=enabled)
+                    dependent_details_fields:
+                      type: object
+                      properties:
+                        dependentDetails_mobileNumber:
+                          type: integer
+                          enum: [-1, 1]
+                          description: Enable/disable dependent mobile number field (-1=disabled, 1=enabled)
+                    ctc_details_fields:
+                      type: object
+                      properties:
+                        ctc_deductions_misc:
+                          type: integer
+                          enum: [-1, 1]
+                          description: Enable/disable CTC miscellaneous deductions field (-1=disabled, 1=enabled)
+                        ctc_deductions_esi:
+                          type: integer
+                          enum: [-1, 1]
+                          description: Enable/disable CTC ESI deductions field (-1=disabled, 1=enabled)
       responses:
         '200':
           description: Successful token generation
